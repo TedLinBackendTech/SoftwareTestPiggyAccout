@@ -4,6 +4,7 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import testUtil.AbstractTest;
@@ -70,5 +71,15 @@ public class AddExpenseTest extends AbstractTest {
 //            }
 //        }
 //        assertTrue(isSuccess);
+    }
+    @AfterMethod
+    public void delete_temp_data(){
+        MobileElement el19 = (MobileElement) driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[2]");
+        el19.click();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        MobileElement el2 = (MobileElement) driver.findElementByAccessibilityId("刪除");
+        el2.click();
+        MobileElement el3 = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/btn_confirm");
+        el3.click();
     }
 }

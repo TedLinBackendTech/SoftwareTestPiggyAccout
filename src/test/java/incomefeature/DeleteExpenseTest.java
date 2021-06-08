@@ -61,9 +61,6 @@ public class DeleteExpenseTest extends AbstractTest {
 
     @Test
     public void Test_delete_expense_happypath(){
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        MobileElement el0 = buttonNavigationBar.getRecordListButton();
-        el0.click();
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         MobileElement el1 = (MobileElement) driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[2]");
         el1.click();

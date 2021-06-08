@@ -4,6 +4,7 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import testUtil.AbstractTest;
@@ -13,6 +14,8 @@ import testUtil.Calculator;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
+
+import static org.junit.Assert.assertEquals;
 
 // TCS-3
 public class EditExpenseTest extends AbstractTest {
@@ -53,7 +56,6 @@ public class EditExpenseTest extends AbstractTest {
         el9.click();
         MobileElement el10 = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/btn_save");
         el10.click();
-
     }
 
     @Test
@@ -61,7 +63,7 @@ public class EditExpenseTest extends AbstractTest {
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         MobileElement el2 = (MobileElement) driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[2]");
         el2.click();
-        String Date = "30 June 2021";
+        String Date = "10 June 2021";
         // Input date
         MobileElement dateButton = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/tv_time");
         dateButton.clear();
@@ -88,6 +90,31 @@ public class EditExpenseTest extends AbstractTest {
         MobileElement el18 = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/btn_save");
         el18.click();
 
+
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        MobileElement el19 = (MobileElement) driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[2]");
+        el19.click();
+
+        MobileElement el20 = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/tv_time");
+        assertEquals("2021/06/10 (Thu)",el20.getText());
+
+        MobileElement el21 = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/tv_amount");
+        assertEquals("$3,000",el21.getText());
+
+        MobileElement el22 = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/tv_category");
+        assertEquals("午餐",el22.getText());
+
+        MobileElement el23 = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/tv_account");
+        assertEquals("其他",el23.getText());
+    }
+
+    @AfterMethod
+    public void delete_temp_data(){
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        MobileElement el2 = (MobileElement) driver.findElementByAccessibilityId("刪除");
+        el2.click();
+        MobileElement el3 = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/btn_confirm");
+        el3.click();
     }
 }
 

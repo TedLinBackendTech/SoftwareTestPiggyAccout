@@ -23,7 +23,7 @@ public abstract class AbstractTest {
         caps.setCapability("udid", "emulator-5554"); //DeviceId from "adb devices" command
         caps.setCapability("platformName", "Android");
         caps.setCapability("skipUnlock","true");
-        caps.setCapability("app", "C:\\Users\\Ted Lin\\Desktop\\pig.apk");
+        caps.setCapability("app", "C:\\Users\\William\\Desktop\\pig.apk");
         caps.setCapability("autoGrantPermissions", "true");
         caps.setCapability("autoAcceptAlerts", "true");
         caps.setCapability("noReset","true");
