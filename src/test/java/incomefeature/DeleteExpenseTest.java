@@ -14,10 +14,8 @@ import testUtil.Calculator;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
-
-import static org.junit.Assert.assertTrue;
-
-public class AddExpenseTest {
+// TCS-2
+public class DeleteExpenseTest {
     public AndroidDriver<MobileElement> driver;
     public WebDriverWait wait;
     //utils
@@ -40,16 +38,6 @@ public class AddExpenseTest {
         calculator = new Calculator(driver);
         buttonNavigationBar = new ButtonNavigationBar(driver);
 
-    }
-    public void move(int fromPointX, int fromPointY, int toPointX, int toPointY ){
-        new TouchAction(driver)
-                .press(PointOption.point(fromPointX,fromPointY))
-                .moveTo(PointOption.point(toPointX,toPointY))
-                .release()
-                .perform();
-    }
-    @Test
-    public void Test_add_expense_happypath(){
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         MobileElement el1 = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/iv_create_record");
         el1.click();
@@ -85,15 +73,22 @@ public class AddExpenseTest {
         el9.click();
         MobileElement el10 = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/btn_save");
         el10.click();
-//       net.eclipse_tech.naggingmoney:id/chatSendButton").click();
-//        List<MobileElement> chatList = driver.findElementsByClassName("android.widget.TextView");
-//        boolean isSuccess = false;
-//        for(MobileElement chat : chatList){
-//            if(chat.getText().equals("專案 $999999999999 ")){
-//                isSuccess = true;
-//                break;
-//            }
-//        }
-//        assertTrue(isSuccess);
+
+    }
+
+    @Test
+    public void Test_delete_expense_happypath(){
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        MobileElement el0 = buttonNavigationBar.getRecordListButton();
+        el0.click();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        MobileElement el1 = (MobileElement) driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[2]");
+        el1.click();
+        MobileElement el2 = (MobileElement) driver.findElementByAccessibilityId("刪除");
+        el2.click();
+        MobileElement el3 = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/btn_confirm");
+        el3.click();
+
+
     }
 }
