@@ -15,6 +15,7 @@ public abstract class AbstractTest {
     //utils
     public Calculator calculator;
     public ButtonNavigationBar buttonNavigationBar;
+    public AdvanceFunctionsPage advanceFunctionsPage;
     @BeforeMethod
     public void setUp() throws MalformedURLException {
         DesiredCapabilities caps = new DesiredCapabilities();
@@ -31,5 +32,6 @@ public abstract class AbstractTest {
         wait = new WebDriverWait(driver, 10);
         calculator = new Calculator(driver);
         buttonNavigationBar = new ButtonNavigationBar(driver);
+        advanceFunctionsPage = new AdvanceFunctionsPage(driver);
     }
 }

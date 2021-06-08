@@ -20,6 +20,7 @@ public class AddExpenseTest extends AbstractTest {
     @Override
     public void setUp() throws MalformedURLException {
        super.setUp();
+
     }
 
     @Test
