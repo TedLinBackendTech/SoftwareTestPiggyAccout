@@ -45,6 +45,7 @@ public class deleteAccountTest extends AbstractTest {
 
         MobileElement deleteAccountButton =(MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/menu_delete");
         deleteAccountButton.click();
+
         MobileElement deleteConfirmButton = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/btn_confirm");
         deleteConfirmButton.click();
 

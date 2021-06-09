@@ -22,6 +22,7 @@ public class SearchforTextTest extends AbstractTest {
         expenseUtil = new ExpenseUtil(driver);
         driver.manage().timeouts().implicitlyWait(7, TimeUnit.SECONDS);
         this.create_a_expense("20 June 2021","1000","晚餐","其他","跟同學聚餐");
+        this.create_a_expense("21 June 2021","68","晚餐","其他","自己煮");
     }
     @Test
     public void Test_search_happypath_with_text_as_type_Expect_get_result() {
@@ -40,7 +41,7 @@ public class SearchforTextTest extends AbstractTest {
 
         int searchResultListLength = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[2]/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
 
-        assertTrue(1 == searchResultListLength);
+        assertTrue(2 == searchResultListLength);
 
         MobileElement exitSearch = (MobileElement) driver.findElementByAccessibilityId("Navigate up");
         exitSearch.click();
@@ -98,14 +99,17 @@ public class SearchforTextTest extends AbstractTest {
 
         MobileElement categoryButton = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/tv_category");
         categoryButton.click();
-        MobileElement selectedCategory = expenseUtil.getExpenseCategoryByText(category);
-        selectedCategory.click();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.findElementByAndroidUIAutomator("new UiSelector().text(\""+category+"\")").click();
+//        MobileElement selectedCategory = expenseUtil.getExpenseCategoryByText(category);
+//        selectedCategory.click();
 
         MobileElement accountButton = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/tv_account");
         accountButton.click();
-        driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-        MobileElement selectedAccountName = expenseUtil.getExpenseAccountByText(accountName);
-        selectedAccountName.click();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.findElementByAndroidUIAutomator("new UiSelector().text(\""+accountName+"\")").click();
+//        MobileElement selectedAccountName = expenseUtil.getExpenseAccountByText(accountName);
+//        selectedAccountName.click();
 
         MobileElement commentButton = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/et_note");
         commentButton.click();
@@ -139,6 +143,7 @@ public class SearchforTextTest extends AbstractTest {
                         amountEWithoutComma.equals("$" + money)) {
                     preCreatedExpense = (MobileElement) driver.findElementByXPath(EIxpath + "[" + i +"]");
                     System.out.println("get element");
+                    break;
                 }
             } catch (Exception e) {
                 // 沒抓到 那就是日期欄
@@ -156,5 +161,6 @@ public class SearchforTextTest extends AbstractTest {
     public void tearDown(){
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         this.delete_a_expense("20 June 2021","1000","晚餐","其他","跟同學聚餐");
+        this.delete_a_expense("21 June 2021","68","晚餐","其他","自己煮");
     }
 }
