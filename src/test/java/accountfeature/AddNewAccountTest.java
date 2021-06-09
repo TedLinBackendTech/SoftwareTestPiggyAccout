@@ -8,6 +8,9 @@ import testUtil.AccountType;
 
 import java.net.MalformedURLException;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import static org.junit.Assert.assertTrue;
 
 public class AddNewAccountTest extends AbstractTest {
     private AccountType accountTypeSelector;
@@ -20,12 +23,12 @@ public class AddNewAccountTest extends AbstractTest {
     @Test
     public void Test_add_account_happypath() {
         //InputData
-        String accountName = "新光銀行";
+        String accountName = "新光銀行2";
         String accountType = "一般";
         String amount = "1200";
         String comment = "薪轉戶";
 
-
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         buttonNavigationBar.getAdvanceFunctionsButton().click();
         advanceFunctionsPage.getAccountOrderButton().click();
         MobileElement addNewAccountButton = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/btn_create");
@@ -53,10 +56,19 @@ public class AddNewAccountTest extends AbstractTest {
         MobileElement saveButton = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/btn_save");
         saveButton.click();
 
-        List<MobileElement> accountList = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup");
-        for(MobileElement accountItem: accountList ) {
-            System.out.println(accountItem);
+
+        boolean isCreateNewAccountSuccess = false;
+        int accountListlength = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
+        for(int i = 1 ; i <= accountListlength; i++ ) {
+            String xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/" +
+                    "android.view.ViewGroup["+ i + "]/android.widget.TextView";
+            if(driver.findElementByXPath(xpath).getText().equals(accountName)){
+                isCreateNewAccountSuccess = true;
+                break;
+            }
         }
+        assertTrue(isCreateNewAccountSuccess);
+
     }
 
 }
