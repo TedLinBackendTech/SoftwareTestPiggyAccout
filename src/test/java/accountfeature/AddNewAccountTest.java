@@ -19,7 +19,7 @@ public class AddNewAccountTest extends AbstractTest {
     public void setUp() throws MalformedURLException {
         super.setUp();
         accountTypeSelector = new AccountType(driver);
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(7, TimeUnit.SECONDS);
     }
     @Test
     public void Test_add_account_happypath() {
@@ -44,9 +44,9 @@ public class AddNewAccountTest extends AbstractTest {
 
         MobileElement inputQuotaField = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/tv_current_amount");
         inputQuotaField.click();
-        calculator.getOne().click();
-        calculator.getTwo().click();
-        calculator.getDblZero().click();
+        for (char ch: amount.toCharArray()) {
+            calculator.getButton(ch).click();
+        }
         calculator.getOk().click();
 
         MobileElement inputCommentField = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/et_note");
