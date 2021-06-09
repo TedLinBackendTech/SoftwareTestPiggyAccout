@@ -31,6 +31,64 @@ public class Calculator {
         this.driver = driver;
     }
 
+    public MobileElement getButton(char buttonType) {
+        MobileElement chosenButton = null;
+        switch (buttonType) {
+            case '0':
+                chosenButton = this.getZero();
+                break;
+            case '1':
+                chosenButton = this.getOne();
+                break;
+            case '2':
+                chosenButton = this.getTwo();
+                break;
+            case '3':
+                chosenButton = this.getThree();
+                break;
+            case '4':
+                chosenButton = this.getFour();
+                break;
+            case '5':
+                chosenButton = this.getFive();
+                break;
+            case '6':
+                chosenButton = this.getSix();
+                break;
+            case '7':
+                chosenButton = this.getSeven();
+                break;
+            case '8':
+                chosenButton = this.getEight();
+                break;
+            case '9':
+                chosenButton = this.getNine();
+                break;
+            case '.':
+                chosenButton = this.getPoint();
+                break;
+            case '+':
+                chosenButton = this.getAdd();
+                break;
+            case '-':
+                chosenButton = this.getSubtract();
+                break;
+            case '*':
+                chosenButton = this.getMultiply();
+                break;
+            case '/':
+                chosenButton = this.getDivide();
+                break;
+            case '=':
+                chosenButton = this.getEqual();
+                break;
+            default:
+                break;
+        }
+        return chosenButton;
+
+    }
+
     public MobileElement getZero() {
         this.zero = (MobileElement) driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/android.view.ViewGroup/androidx.recyclerview.widget.RecyclerView/android.widget.FrameLayout[17]/android.widget.TextView");
         return zero;

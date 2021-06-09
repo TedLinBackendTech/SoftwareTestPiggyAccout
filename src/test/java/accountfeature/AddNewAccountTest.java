@@ -19,6 +19,7 @@ public class AddNewAccountTest extends AbstractTest {
     public void setUp() throws MalformedURLException {
         super.setUp();
         accountTypeSelector = new AccountType(driver);
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
     }
     @Test
     public void Test_add_account_happypath() {
@@ -28,7 +29,6 @@ public class AddNewAccountTest extends AbstractTest {
         String amount = "1200";
         String comment = "薪轉戶";
 
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         buttonNavigationBar.getAdvanceFunctionsButton().click();
         advanceFunctionsPage.getAccountOrderButton().click();
         MobileElement addNewAccountButton = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/btn_create");
