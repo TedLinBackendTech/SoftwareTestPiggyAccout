@@ -101,15 +101,11 @@ public class SearchforTextTest extends AbstractTest {
         categoryButton.click();
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         driver.findElementByAndroidUIAutomator("new UiSelector().text(\""+category+"\")").click();
-//        MobileElement selectedCategory = expenseUtil.getExpenseCategoryByText(category);
-//        selectedCategory.click();
 
         MobileElement accountButton = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/tv_account");
         accountButton.click();
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         driver.findElementByAndroidUIAutomator("new UiSelector().text(\""+accountName+"\")").click();
-//        MobileElement selectedAccountName = expenseUtil.getExpenseAccountByText(accountName);
-//        selectedAccountName.click();
 
         MobileElement commentButton = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/et_note");
         commentButton.click();
