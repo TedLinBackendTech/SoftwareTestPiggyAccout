@@ -158,9 +158,10 @@ public class SearchforTextTest extends AbstractTest {
     }
 
     @AfterMethod
+    @Override
     public void tearDown(){
-        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         this.delete_a_expense("20 June 2021","1000","晚餐","其他","跟同學聚餐");
         this.delete_a_expense("21 June 2021","68","晚餐","其他","自己煮");
+        super.tearDown();
     }
 }
