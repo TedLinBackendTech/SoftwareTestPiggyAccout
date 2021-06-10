@@ -18,6 +18,7 @@ public abstract class AbstractTest {
     public Calculator calculator;
     public ButtonNavigationBar buttonNavigationBar;
     public AdvanceFunctionsPage advanceFunctionsPage;
+    public ElementUtil elementUtil;
     @BeforeMethod
     public void setUp() throws MalformedURLException {
         DesiredCapabilities caps = new DesiredCapabilities();
@@ -40,12 +41,12 @@ public abstract class AbstractTest {
         calculator = new Calculator(driver);
         buttonNavigationBar = new ButtonNavigationBar(driver);
         advanceFunctionsPage = new AdvanceFunctionsPage(driver);
+        elementUtil = new ElementUtil(driver);
     }
 
     @AfterMethod
-    public void tearDown(){
+    public void tearDown() {
         driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-
-//        driver.closeApp();
+        // driver.closeApp();
     }
 }
