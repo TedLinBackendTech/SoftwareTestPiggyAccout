@@ -18,6 +18,7 @@ public abstract class AbstractTest {
     public Calculator calculator;
     public ButtonNavigationBar buttonNavigationBar;
     public AdvanceFunctionsPage advanceFunctionsPage;
+    public ElementUtil elementUtil;
     @BeforeMethod
     public void setUp() throws MalformedURLException {
         DesiredCapabilities caps = new DesiredCapabilities();
@@ -25,7 +26,7 @@ public abstract class AbstractTest {
         caps.setCapability("udid", "emulator-5554"); //DeviceId from "adb devices" command
         caps.setCapability("platformName", "Android");
         caps.setCapability("skipUnlock","true");
-        caps.setCapability("app", "C:\\Users\\Ted Lin\\Desktop\\pig.apk");
+        caps.setCapability("app", "C:\\Users\\peteryu\\Documents\\SoftwareTestPiggyAccout\\pig.apk");
         caps.setCapability("appPackage", "com.coceany.piggyaccounting");
         caps.setCapability("appActivity","com.coceany.kokosaver.page.main.SplashActivity");
         caps.setCapability("autoGrantPermissions", "true");
@@ -40,12 +41,12 @@ public abstract class AbstractTest {
         calculator = new Calculator(driver);
         buttonNavigationBar = new ButtonNavigationBar(driver);
         advanceFunctionsPage = new AdvanceFunctionsPage(driver);
+        elementUtil = new ElementUtil(driver);
     }
 
     @AfterMethod
-    public void tearDown(){
+    public void tearDown() {
         driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-
-//        driver.closeApp();
+        // driver.closeApp();
     }
 }

@@ -1,4 +1,6 @@
 package notifyfeature;
 
-public class SetNotifyTest {
+import testUtil.AbstractTest;
+
+public class SetNotifyTest extends AbstractTest {
 }

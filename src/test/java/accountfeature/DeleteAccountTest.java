@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class deleteAccountTest extends AbstractTest {
+public class DeleteAccountTest extends AbstractTest {
     private AccountType accountTypeSelector;
     //Setup Input
     private String accountName = "新光銀行";

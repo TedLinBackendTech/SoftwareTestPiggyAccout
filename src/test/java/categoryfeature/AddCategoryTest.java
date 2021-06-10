@@ -1,4 +1,6 @@
 package categoryfeature;
 
-public class AddCategoryTest {
+import testUtil.AbstractTest;
+
+public class AddCategoryTest extends AbstractTest {
 }
