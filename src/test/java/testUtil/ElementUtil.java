@@ -18,6 +18,7 @@ public class ElementUtil {
     }
 
     public void SendKeysByXpath(String keys, String xpath) {
+        driver.findElementByXPath(xpath).clear();
         driver.findElementByXPath(xpath).sendKeys(keys);
     }
 }
