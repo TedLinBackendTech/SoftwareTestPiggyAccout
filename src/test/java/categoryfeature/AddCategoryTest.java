@@ -2,5 +2,330 @@ package categoryfeature;
 
 import testUtil.AbstractTest;
 
+import io.appium.java_client.MobileElement;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+import testUtil.AbstractTest;
+import static org.junit.Assert.*;
+
+import java.net.MalformedURLException;
+import java.util.concurrent.TimeUnit;
+
+import static org.junit.Assert.assertTrue;
+
 public class AddCategoryTest extends AbstractTest {
+    @BeforeMethod
+    @Override
+    public void setUp() throws MalformedURLException {
+        super.setUp();
+
+    }
+
+    @Test
+    public void Test_add_expense_category_T1_byECC_Test_add_expense_category_happypath(){
+        String expenseCategoryName = "支出類別新增測試我要大於五十字我要大於五十字我要大於五十字我要大於五十字我要大於五十字我要大於五十字我要大於五十字";
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.findElementById("com.coceany.piggyaccounting:id/iv_profile").click();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout[2]/android.widget.FrameLayout[2]/android.view.ViewGroup").click();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.findElementById("com.coceany.piggyaccounting:id/btn_create").click();
+        MobileElement el = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/et_name");
+        el.click();
+        el.sendKeys(expenseCategoryName);
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.findElementById("com.coceany.piggyaccounting:id/cb_expense_category").click();
+        driver.findElementById("com.coceany.piggyaccounting:id/btn_save").click();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+
+        // return first
+//        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+//        driver.findElementByAccessibilityId("Navigate up").click();
+//        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+//        driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout[2]/android.widget.FrameLayout[2]/android.view.ViewGroup").click();
+
+        // assert
+        int categoryListLength = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
+        System.out.println("categoryListLength="+categoryListLength);
+        boolean isCreateNewExpenseCategorySuccess = false;
+        int index = 1;
+        for(index = 1; index <= categoryListLength; index++){
+            String xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[" + index + "]/android.widget.TextView";
+            if(driver.findElementByXPath(xpath).getText().equals(expenseCategoryName)){
+                isCreateNewExpenseCategorySuccess = true;
+                break;
+            }
+        }
+        assertTrue(isCreateNewExpenseCategorySuccess);
+
+        // delete
+        delete_category("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[" + index + "]/android.widget.TextView");
+    }
+
+    @Test
+    public void Test_add_expense_category_T2_byECC_Test_add_both_category(){
+        String categoryName = "收入和支出類別新增測試";
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.findElementById("com.coceany.piggyaccounting:id/iv_profile").click();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout[2]/android.widget.FrameLayout[2]/android.view.ViewGroup").click();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.findElementById("com.coceany.piggyaccounting:id/btn_create").click();
+        MobileElement el = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/et_name");
+        el.click();
+        el.sendKeys(categoryName);
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.findElementById("com.coceany.piggyaccounting:id/cb_expense_category").click();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.findElementById("com.coceany.piggyaccounting:id/cb_income_category").click();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.findElementById("com.coceany.piggyaccounting:id/btn_save").click();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+        // return first
+//        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+//        driver.findElementByAccessibilityId("Navigate up").click();
+//        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+//        driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout[2]/android.widget.FrameLayout[2]/android.view.ViewGroup").click();
+
+        // expense assert
+        int expenseCategoryListLength = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
+        System.out.println("expenseCategoryListLength="+expenseCategoryListLength);
+        boolean isCreateNewExpenseCategorySuccess = false;
+        int index = 1;
+        for(index = 1; index <= expenseCategoryListLength; index++){
+            String xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[" + index + "]/android.widget.TextView";
+            if(driver.findElementByXPath(xpath).getText().equals(categoryName)){
+                isCreateNewExpenseCategorySuccess = true;
+                break;
+            }
+        }
+        assertTrue(isCreateNewExpenseCategorySuccess);
+
+        // delete
+        delete_category("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[" + index + "]/android.widget.TextView");
+
+        // return first
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.findElementByAccessibilityId("Navigate up").click();
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout[2]/android.widget.FrameLayout[3]/android.view.ViewGroup").click();
+
+        // income assert
+        int incomeCategoryListLength = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
+        System.out.println("incomeCategoryListLength="+incomeCategoryListLength);
+        boolean isCreateNewIncomeCategorySuccess = false;
+        index = 1;
+        for(index = 1; index <= incomeCategoryListLength; index++){
+            String xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[" + index + "]/android.widget.TextView";
+            if(driver.findElementByXPath(xpath).getText().equals(categoryName)){
+                isCreateNewIncomeCategorySuccess = true;
+                break;
+            }
+        }
+        assertTrue(isCreateNewIncomeCategorySuccess);
+
+        // delete
+        delete_category("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[" + index + "]/android.widget.TextView");
+    }
+
+    @Test
+    public void Test_add_expense_category_T3_byECC_Test_add_expense_space_and_income_category(){
+        String expenseCategoryName = " ";
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.findElementById("com.coceany.piggyaccounting:id/iv_profile").click();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout[2]/android.widget.FrameLayout[2]/android.view.ViewGroup").click();
+        driver.findElementById("com.coceany.piggyaccounting:id/btn_create").click();
+        MobileElement el = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/et_name");
+        el.click();
+        el.sendKeys(expenseCategoryName);
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.findElementById("com.coceany.piggyaccounting:id/cb_income_category").click();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.findElementById("com.coceany.piggyaccounting:id/btn_save").click();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+
+        // return first
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.findElementByAccessibilityId("Navigate up").click();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout[2]/android.widget.FrameLayout[3]/android.view.ViewGroup").click();
+
+        // assert
+        int categoryListLength = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
+        System.out.println("categoryListLength="+categoryListLength);
+        boolean isCreateNewExpenseCategorySuccess = false;
+        int index = 1;
+        for(index = 1; index <= categoryListLength; index++){
+            String xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[" + index + "]/android.widget.TextView";
+            if(driver.findElementByXPath(xpath).getText().equals(expenseCategoryName)){
+                isCreateNewExpenseCategorySuccess = true;
+                break;
+            }
+        }
+        assertTrue(isCreateNewExpenseCategorySuccess);
+
+        // delete
+        delete_category("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[" + index + "]/android.widget.TextView");
+    }
+
+    @Test
+    public void Test_add_expense_category_T4_byECC_Test_add_expense_with_null_name_and_null_category(){
+        String expenseCategoryName = "";
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.findElementById("com.coceany.piggyaccounting:id/iv_profile").click();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout[2]/android.widget.FrameLayout[2]/android.view.ViewGroup").click();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.findElementById("com.coceany.piggyaccounting:id/btn_create").click();
+        driver.findElementById("com.coceany.piggyaccounting:id/btn_save").click();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+
+        // assert
+        assertEquals("名稱不能空白喔！",driver.findElementByXPath("/hierarchy/android.widget.Toast").getText());
+
+    }
+
+    @Test
+    public void Test_add_income_category_T1_byECC_Test_add_income_category_happypath(){
+        String incomeCategoryName = "收入類別新增測試";
+        driver.manage().timeouts().implicitlyWait(6, TimeUnit.SECONDS);
+        driver.findElementById("com.coceany.piggyaccounting:id/iv_profile").click();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout[2]/android.widget.FrameLayout[3]/android.view.ViewGroup").click();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.findElementById("com.coceany.piggyaccounting:id/btn_create").click();
+        MobileElement el = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/et_name");
+        el.click();
+        el.sendKeys(incomeCategoryName);
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.findElementById("com.coceany.piggyaccounting:id/cb_income_category").click();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.findElementById("com.coceany.piggyaccounting:id/btn_save").click();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+
+        // assert
+        int categoryListLength = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
+        System.out.println("categoryListLength1="+categoryListLength);
+        boolean isCreateNewIncomeCategorySuccess = false;
+        int index = 1;
+        for(index = 1; index <= categoryListLength; index++){
+            String xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[" + index + "]/android.widget.TextView";
+            if(driver.findElementByXPath(xpath).getText().equals(incomeCategoryName)){
+                isCreateNewIncomeCategorySuccess = true;
+                break;
+            }
+        }
+        assertTrue(isCreateNewIncomeCategorySuccess);
+
+        // delete
+        delete_category("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[" + index + "]/android.widget.TextView");
+    }
+
+    @Test
+    public void Test_add_income_category_T2_byECC_Test_add_income_space_and_expense_category(){
+        String incomeCategoryName = " ";
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.findElementById("com.coceany.piggyaccounting:id/iv_profile").click();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout[2]/android.widget.FrameLayout[3]/android.view.ViewGroup").click();
+        driver.findElementById("com.coceany.piggyaccounting:id/btn_create").click();
+        MobileElement el = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/et_name");
+        el.click();
+        el.sendKeys(incomeCategoryName);
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.findElementById("com.coceany.piggyaccounting:id/cb_expense_category").click();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.findElementById("com.coceany.piggyaccounting:id/btn_save").click();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+
+        // return first
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.findElementByAccessibilityId("Navigate up").click();
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout[2]/android.widget.FrameLayout[2]/android.view.ViewGroup").click();
+
+        // assert
+        int categoryListLength = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
+        System.out.println("categoryListLength1="+categoryListLength);
+        boolean isCreateNewIncomeCategorySuccess = false;
+        int index = 1;
+        for(index = 1; index <= categoryListLength; index++){
+            String xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[" + index + "]/android.widget.TextView";
+            if(driver.findElementByXPath(xpath).getText().equals(incomeCategoryName)){
+                isCreateNewIncomeCategorySuccess = true;
+                break;
+            }
+        }
+        assertTrue(isCreateNewIncomeCategorySuccess);
+
+        // delete
+        delete_category("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[" + index + "]/android.widget.TextView");
+    }
+
+    @Test
+    public void Test_add_income_category_T3_byECC_Test_add_income_with_null_category(){
+        String incomeCategoryName = "收入類別新增測試我要大於五十字我要大於五十字我要大於五十字我要大於五十字我要大於五十字我要大於五十字我要大於五十字";
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.findElementById("com.coceany.piggyaccounting:id/iv_profile").click();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout[2]/android.widget.FrameLayout[3]/android.view.ViewGroup").click();
+        driver.findElementById("com.coceany.piggyaccounting:id/btn_create").click();
+        MobileElement el = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/et_name");
+        el.click();
+        el.sendKeys(incomeCategoryName);
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.findElementById("com.coceany.piggyaccounting:id/btn_save").click();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+
+        // assert
+
+        assertEquals("至少選擇一種類別！",driver.findElementByXPath("/hierarchy/android.widget.Toast").getText());
+    }
+
+    @Test
+    public void Test_add_income_category_T4_byECC_Test_add_income_with_null_name_and_both_category(){
+        String incomeCategoryName = "";
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.findElementById("com.coceany.piggyaccounting:id/iv_profile").click();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout[2]/android.widget.FrameLayout[3]/android.view.ViewGroup").click();
+        driver.findElementById("com.coceany.piggyaccounting:id/btn_create").click();
+        MobileElement el = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/et_name");
+        el.click();
+        el.sendKeys(incomeCategoryName);
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.findElementById("com.coceany.piggyaccounting:id/cb_expense_category").click();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.findElementById("com.coceany.piggyaccounting:id/cb_income_category").click();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.findElementById("com.coceany.piggyaccounting:id/btn_save").click();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+
+        // assert
+
+        assertEquals("名稱不能空白喔！",driver.findElementByXPath("/hierarchy/android.widget.Toast").getText());
+    }
+
+
+    private void delete_category(String deletePath){
+        driver.findElementByXPath(deletePath).click();
+        MobileElement el1 = (MobileElement) driver.findElementByAccessibilityId("刪除");
+        el1.click();
+        MobileElement el12 = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/btn_confirm");
+        el12.click();
+    }
+
+    @AfterMethod
+    @Override
+    public void tearDown() {
+        super.tearDown();
+        if (driver != null){
+            driver.closeApp();
+            driver.quit();
+        }
+    }
 }
+
