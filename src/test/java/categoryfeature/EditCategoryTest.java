@@ -31,7 +31,7 @@ public class EditCategoryTest extends AbstractTest {
 //        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 //        driver.findElementByAccessibilityId("Navigate up").click();
 //        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-//        driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout[2]/android.widget.FrameLayout[2]/android.view.ViewGroup").click();
+//        advanceFunctionsPage.getExpenseCategoryButton().click();
 
         // search name which need to edit
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
@@ -129,7 +129,7 @@ public class EditCategoryTest extends AbstractTest {
 //        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 //        driver.findElementByAccessibilityId("Navigate up").click();
 //        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-//        driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout[2]/android.widget.FrameLayout[2]/android.view.ViewGroup").click();
+//        advanceFunctionsPage.getExpenseCategoryButton().click();
 
         // search name which need to edit
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
@@ -166,7 +166,7 @@ public class EditCategoryTest extends AbstractTest {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.findElementByAccessibilityId("Navigate up").click();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout[2]/android.widget.FrameLayout[2]/android.view.ViewGroup").click();
+        advanceFunctionsPage.getExpenseCategoryButton().click();
 
         // search name which need to edit
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
@@ -219,7 +219,7 @@ public class EditCategoryTest extends AbstractTest {
 //        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 //        driver.findElementByAccessibilityId("Navigate up").click();
 //        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-//        driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout[2]/android.widget.FrameLayout[2]/android.view.ViewGroup").click();
+//        advanceFunctionsPage.getExpenseCategoryButton().click();
 
         // search name which need to edit
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
@@ -272,7 +272,7 @@ public class EditCategoryTest extends AbstractTest {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.findElementByAccessibilityId("Navigate up").click();
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-        driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout[2]/android.widget.FrameLayout[2]/android.view.ViewGroup").click();
+        advanceFunctionsPage.getExpenseCategoryButton().click();
 
         // search name which need to edit
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
@@ -482,9 +482,9 @@ public class EditCategoryTest extends AbstractTest {
 
     private void create_new_normal_expense_category(String categoryName){
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.findElementById("com.coceany.piggyaccounting:id/iv_profile").click();
+        buttonNavigationBar.getAdvanceFunctionsButton().click();
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-        driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout[2]/android.widget.FrameLayout[2]/android.view.ViewGroup").click();
+        advanceFunctionsPage.getExpenseCategoryButton().click();
         driver.findElementById("com.coceany.piggyaccounting:id/btn_create").click();
         MobileElement el = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/et_name");
         el.click();
@@ -498,9 +498,9 @@ public class EditCategoryTest extends AbstractTest {
 
     private void create_new_normal_income_category(String categoryName){
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.findElementById("com.coceany.piggyaccounting:id/iv_profile").click();
+        buttonNavigationBar.getAdvanceFunctionsButton().click();
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-        driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout[2]/android.widget.FrameLayout[3]/android.view.ViewGroup").click();
+        advanceFunctionsPage.getIncomeCategoryButton().click();
         driver.findElementById("com.coceany.piggyaccounting:id/btn_create").click();
         MobileElement el = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/et_name");
         el.click();
