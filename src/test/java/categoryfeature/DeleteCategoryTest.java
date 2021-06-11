@@ -194,7 +194,6 @@ public class DeleteCategoryTest extends AbstractTest {
         driver.findElementById("com.coceany.piggyaccounting:id/btn_confirm").click();
     }
 
-    // todo happypath_b click confirm not yet
     @Test
     public void Test_delete_expense_category_happypath_b(){
         // add new category first
@@ -216,8 +215,9 @@ public class DeleteCategoryTest extends AbstractTest {
         int categoryListLengthOrigin = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
         System.out.println("categoryListLengthOrigin="+categoryListLengthOrigin);
         for(int i = 1; i <= categoryListLengthOrigin; i++){
-            String xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[" + i + "]/android.widget.ImageButton[1]";
+            String xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[" + i + "]/android.widget.TextView";
             if(driver.findElementByXPath(xpath).getText().equals(expenseCategoryName)){
+                xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[" + i + "]/android.widget.ImageButton[1]";
                 driver.findElementByXPath(xpath).click();
                 break;
             }
@@ -247,51 +247,52 @@ public class DeleteCategoryTest extends AbstractTest {
         }
         assertTrue(isDeleteExpenseCategorySuccess);
     }
-//
-//    @Test
-//    public void Test_delete_income_category_happypath_b(){
-//        // add new category first
-//        String incomeCategoryName = "收入類別刪除測試b";
-//        this.create_new_normal_income_category(incomeCategoryName);
-//
-//        // click delete
-//        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-//        driver.findElementById("com.coceany.piggyaccounting:id/btn_order_or_delete").click();
-//
-//        // search name which need to delete
-//        int categoryListLengthOrigin = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
-//        System.out.println("categoryListLengthOrigin="+categoryListLengthOrigin);
-//        for(int i = 1; i <= categoryListLengthOrigin; i++){
-//            String xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[" + i + "]/android.widget.ImageButton[1]";
-//            if(driver.findElementByXPath(xpath).getText().equals(incomeCategoryName)){
-//                driver.findElementByXPath(xpath).click();
-//                break;
-//            }
-//        }
-//
-//        // delete
-//        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-//        MobileElement saveDeleteActionButton =(MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/btn_order_or_delete");
-//        saveDeleteActionButton.click();
-//        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-//        MobileElement deleteConfirmButton = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/btn_confirm");
-//        deleteConfirmButton.click();
-//
-//        // assert
-//        int categoryListLength = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
-//        System.out.println("categoryListLength="+categoryListLength);
-//        boolean isDeleteIncomeCategorySuccess = false;
-//        for(int i = 1; i <= categoryListLength; i++){
-//            String xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[" + i + "]/android.widget.TextView";
-//            if(driver.findElementByXPath(xpath).getText().equals(incomeCategoryName)){
-//                isDeleteIncomeCategorySuccess = false;
-//                driver.findElementByXPath(xpath).click();
-//                break;
-//            }
-//            isDeleteIncomeCategorySuccess = true;
-//        }
-//        assertTrue(isDeleteIncomeCategorySuccess);
-//    }
+
+    @Test
+    public void Test_delete_income_category_happypath_b(){
+        // add new category first
+        String incomeCategoryName = "收入類別刪除測試b";
+        this.create_new_normal_income_category(incomeCategoryName);
+
+        // click delete
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.findElementById("com.coceany.piggyaccounting:id/btn_order_or_delete").click();
+
+        // search name which need to delete
+        int categoryListLengthOrigin = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
+        System.out.println("categoryListLengthOrigin="+categoryListLengthOrigin);
+        for(int i = 1; i <= categoryListLengthOrigin; i++){
+            String xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[" + i + "]/android.widget.TextView";
+            if(driver.findElementByXPath(xpath).getText().equals(incomeCategoryName)){
+                xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[" + i + "]/android.widget.ImageButton[1]";
+                driver.findElementByXPath(xpath).click();
+                break;
+            }
+        }
+
+        // delete
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        MobileElement saveDeleteActionButton =(MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/btn_order_or_delete");
+        saveDeleteActionButton.click();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        MobileElement deleteConfirmButton = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/btn_confirm");
+        deleteConfirmButton.click();
+
+        // assert
+        int categoryListLength = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
+        System.out.println("categoryListLength="+categoryListLength);
+        boolean isDeleteIncomeCategorySuccess = false;
+        for(int i = 1; i <= categoryListLength; i++){
+            String xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[" + i + "]/android.widget.TextView";
+            if(driver.findElementByXPath(xpath).getText().equals(incomeCategoryName)){
+                isDeleteIncomeCategorySuccess = false;
+                driver.findElementByXPath(xpath).click();
+                break;
+            }
+            isDeleteIncomeCategorySuccess = true;
+        }
+        assertTrue(isDeleteIncomeCategorySuccess);
+    }
 
     @Test
     public void Test_delete_expense_and_cancel_category_happypath_b(){
@@ -300,11 +301,11 @@ public class DeleteCategoryTest extends AbstractTest {
         this.create_new_normal_expense_category(expenseCategoryName);
 
         // return first
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        MobileElement backButton = (MobileElement) driver.findElementByAccessibilityId("Navigate up");
-        backButton.click();
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-        driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout[2]/android.widget.FrameLayout[2]/android.view.ViewGroup").click();
+//        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+//        MobileElement backButton = (MobileElement) driver.findElementByAccessibilityId("Navigate up");
+//        backButton.click();
+//        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+//        driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout[2]/android.widget.FrameLayout[2]/android.view.ViewGroup").click();
 
         // click delete
         driver.findElementById("com.coceany.piggyaccounting:id/btn_order_or_delete").click();
@@ -314,8 +315,9 @@ public class DeleteCategoryTest extends AbstractTest {
         int categoryListLengthOrigin = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
         System.out.println("categoryListLengthOrigin="+categoryListLengthOrigin);
         for(int i = 1; i <= categoryListLengthOrigin; i++){
-            String xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[" + i + "]/android.widget.ImageButton[1]";
+            String xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[" + i + "]/android.widget.TextView";
             if(driver.findElementByXPath(xpath).getText().equals(expenseCategoryName)){
+                xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[" + i + "]/android.widget.ImageButton[1]";
                 driver.findElementByXPath(xpath).click();
                 break;
             }
@@ -361,8 +363,9 @@ public class DeleteCategoryTest extends AbstractTest {
         int categoryListLengthOrigin = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
         System.out.println("categoryListLengthOrigin="+categoryListLengthOrigin);
         for(int i = 1; i <= categoryListLengthOrigin; i++){
-            String xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[" + i + "]/android.widget.ImageButton[1]";
+            String xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[" + i + "]/android.widget.TextView";
             if(driver.findElementByXPath(xpath).getText().equals(incomeCategoryName)){
+                xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[" + i + "]/android.widget.ImageButton[1]";
                 driver.findElementByXPath(xpath).click();
                 break;
             }
@@ -404,8 +407,9 @@ public class DeleteCategoryTest extends AbstractTest {
         MobileElement el = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/et_name");
         el.click();
         el.sendKeys(categoryName);
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.findElementById("com.coceany.piggyaccounting:id/cb_expense_category").click();
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         driver.findElementById("com.coceany.piggyaccounting:id/btn_save").click();
     }
 
