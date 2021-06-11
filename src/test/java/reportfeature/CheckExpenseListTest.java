@@ -174,7 +174,11 @@ public class CheckExpenseListTest extends AbstractTest {
         elementUtil.ClickByXpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[2]/android.widget.LinearLayout/android.widget.Button[1]");
         // back
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        elementUtil.ClickByXpath("//android.widget.ImageButton[@content-desc=\"Navigate up\"]");
+        try {
+            elementUtil.ClickByXpath("//android.widget.ImageButton[@content-desc=\"Navigate up\"]");
+        } catch (org.openqa.selenium.StaleElementReferenceException e) {
+            buttonNavigationBar.move(104,218,119,223);
+        }
         // analysis
         buttonNavigationBar.getAnalyticsButton().click();
         // check expense amount
@@ -291,7 +295,11 @@ public class CheckExpenseListTest extends AbstractTest {
         elementUtil.ClickByXpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/android.view.ViewGroup/f.x.a.b/androidx.recyclerview.widget.RecyclerView/android.widget.TextView[5]");
         elementUtil.ClickByXpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[2]/android.widget.LinearLayout/android.widget.Button[1]");
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        elementUtil.ClickByXpath("//android.widget.ImageButton[@content-desc=\"Navigate up\"]");
+        try {
+            elementUtil.ClickByXpath("//android.widget.ImageButton[@content-desc=\"Navigate up\"]");
+        } catch (org.openqa.selenium.StaleElementReferenceException e) {
+            buttonNavigationBar.move(104,218,119,223);
+        }
         buttonNavigationBar.getAnalyticsButton().click();
         assertTrue(elementUtil.CheckTextByXpath("$425", "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/f.x.a.b/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.LinearLayout[1]/android.widget.FrameLayout[2]/android.widget.LinearLayout/android.widget.TextView[1]"));
         assertTrue(elementUtil.CheckTextByXpath("3", "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/f.x.a.b/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.LinearLayout[2]/android.widget.FrameLayout[2]/android.widget.LinearLayout/android.widget.TextView[1]"));
@@ -430,7 +438,11 @@ public class CheckExpenseListTest extends AbstractTest {
         elementUtil.ClickByXpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[2]/android.widget.LinearLayout/android.widget.Button[1]");
         // back
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        elementUtil.ClickByXpath("//android.widget.ImageButton[@content-desc=\"Navigate up\"]");
+        try {
+            elementUtil.ClickByXpath("//android.widget.ImageButton[@content-desc=\"Navigate up\"]");
+        } catch (org.openqa.selenium.StaleElementReferenceException e) {
+            buttonNavigationBar.move(104,218,119,223);
+        }
         // analysis
         buttonNavigationBar.getAnalyticsButton().click();
         // check expense amount
@@ -537,7 +549,11 @@ public class CheckExpenseListTest extends AbstractTest {
         elementUtil.ClickByXpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/android.view.ViewGroup/f.x.a.b/androidx.recyclerview.widget.RecyclerView/android.widget.TextView[5]");
         elementUtil.ClickByXpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[2]/android.widget.LinearLayout/android.widget.Button[1]");
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        elementUtil.ClickByXpath("//android.widget.ImageButton[@content-desc=\"Navigate up\"]");
+        try {
+            elementUtil.ClickByXpath("//android.widget.ImageButton[@content-desc=\"Navigate up\"]");
+        } catch (org.openqa.selenium.StaleElementReferenceException e) {
+            buttonNavigationBar.move(104,218,119,223);
+        }
         buttonNavigationBar.getAnalyticsButton().click();
         assertTrue(elementUtil.CheckTextByXpath("$425", "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/f.x.a.b/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.LinearLayout[1]/android.widget.FrameLayout[2]/android.widget.LinearLayout/android.widget.TextView[1]"));
         assertTrue(elementUtil.CheckTextByXpath("3", "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/f.x.a.b/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.LinearLayout[2]/android.widget.FrameLayout[2]/android.widget.LinearLayout/android.widget.TextView[1]"));
