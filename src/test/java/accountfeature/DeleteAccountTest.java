@@ -1,6 +1,7 @@
 package accountfeature;
 
 import io.appium.java_client.MobileElement;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import testUtil.AbstractTest;
@@ -26,6 +27,15 @@ public class DeleteAccountTest extends AbstractTest {
         accountTypeSelector = new AccountType(driver);
         driver.manage().timeouts().implicitlyWait(7, TimeUnit.SECONDS); //wait for app opening
         this.create_new_normal_account(accountName,accountType,amount,comment);
+    }
+    @AfterMethod
+    @Override
+    public void tearDown() {
+        super.tearDown();
+        if (driver != null) {
+            driver.closeApp();// close APP
+            driver.quit(); // end session
+        }
     }
     @Test
     public void Test_delete_account_happypath_a() {
@@ -72,6 +82,48 @@ public class DeleteAccountTest extends AbstractTest {
     }
 
     @Test
+    public void Test_delete_account_alternative_path_a() {
+        String deletedAccountName = this.accountName;
+        MobileElement preCreatedAccount = null ;
+        int accountListlength = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
+        for(int i = 1 ; i <= accountListlength; i++ ) {
+            String xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/" +
+                    "android.view.ViewGroup["+ i + "]/android.widget.TextView";
+            if(driver.findElementByXPath(xpath).getText().equals(deletedAccountName)){
+                preCreatedAccount = driver.findElementByXPath(xpath);
+                break;
+            }
+        }
+
+        preCreatedAccount.click();
+
+        MobileElement deleteAccountButton =(MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/menu_delete");
+        deleteAccountButton.click();
+
+        MobileElement CancelButton = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/btn_cancel");
+        CancelButton.click();
+
+        MobileElement backButton = (MobileElement) driver.findElementByAccessibilityId("Navigate up");
+        backButton.click();
+
+        boolean isCancelDeleteAccountSuccess = false;
+        int afterDeleteAccountListLength = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
+
+        for(int i = 1 ; i <= afterDeleteAccountListLength; i++ ) {
+            String xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/" +
+                    "android.view.ViewGroup["+ i + "]/android.widget.TextView";
+            if(driver.findElementByXPath(xpath).getText().equals(deletedAccountName)){
+                isCancelDeleteAccountSuccess = true;
+                break;
+            }
+        }
+
+        assertTrue(isCancelDeleteAccountSuccess);
+        //android.widget.TextView[@content-desc="刪除"]
+        delete_the_account(this.accountName);
+    }
+
+    @Test
     public void Test_delete_account_happypath_b() {
         String deletedAccountName = this.accountName;
         MobileElement orderOrDeleteButton = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/btn_order_or_delete");
@@ -113,6 +165,55 @@ public class DeleteAccountTest extends AbstractTest {
 
         assertFalse(isDeleteAccountSuccess);
 
+    }
+
+    @Test
+    public void Test_delete_account_alternative_b() {
+        String deletedAccountName = this.accountName;
+        MobileElement orderOrDeleteButton = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/btn_order_or_delete");
+        orderOrDeleteButton.click();
+
+
+        MobileElement deleteAccountButton = null ;
+        int accountListlength = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
+        for(int i = 1 ; i <= accountListlength; i++ ) {
+            String xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/" +
+                    "android.view.ViewGroup["+ i + "]/android.widget.TextView";
+            if(driver.findElementByXPath(xpath).getText().equals(deletedAccountName)){
+                String deleteAccountButtonXpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/" +
+                        "android.view.ViewGroup["+ i + "]/android.widget.ImageButton[1]";
+                deleteAccountButton = (MobileElement) driver.findElementByXPath(deleteAccountButtonXpath);
+                break;
+            }
+        }
+        deleteAccountButton.click();
+
+        MobileElement saveDeleteActionButton =(MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/btn_order_or_delete");
+        saveDeleteActionButton.click();
+
+        MobileElement deleteCancelButton = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/btn_cancel");
+        deleteCancelButton.click();
+
+        MobileElement backButton = (MobileElement) driver.findElementByAccessibilityId("Navigate up");
+        backButton.click();
+
+        advanceFunctionsPage.getAccountOrderButton().click();
+
+        // after save , app will back to accountlists
+        boolean isCancelDeleteAccountSuccess = false;
+        int afterDeleteAccountListLength = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
+
+        for(int i = 1 ; i <= afterDeleteAccountListLength; i++ ) {
+            String xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/" +
+                    "android.view.ViewGroup["+ i + "]/android.widget.TextView";
+            if(driver.findElementByXPath(xpath).getText().equals(deletedAccountName)){
+                isCancelDeleteAccountSuccess = true;
+                break;
+            }
+        }
+
+        assertTrue(isCancelDeleteAccountSuccess);
+        delete_the_account(this.accountName);
     }
 
 
@@ -160,5 +261,45 @@ public class DeleteAccountTest extends AbstractTest {
             }
         }
         assertTrue(isCreateNewAccountSuccess);
+    }
+
+    private void  delete_the_account(String deletedAccountName) {
+        MobileElement preCreatedAccount = null ;
+        int accountListlength = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
+        for(int i = 1 ; i <= accountListlength; i++ ) {
+            String xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/" +
+                    "android.view.ViewGroup["+ i + "]/android.widget.TextView";
+            if(driver.findElementByXPath(xpath).getText().equals(deletedAccountName)){
+                preCreatedAccount = driver.findElementByXPath(xpath);
+                break;
+            }
+        }
+
+        preCreatedAccount.click();
+
+        MobileElement deleteAccountButton =(MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/menu_delete");
+        deleteAccountButton.click();
+
+        MobileElement deleteConfirmButton = null;
+        try{
+            deleteConfirmButton = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/btn_confirm");
+        }catch (Exception e ){
+            deleteConfirmButton = (MobileElement)driver.findElementByAndroidUIAutomator("new UiSelector().text(\"確定\")");
+        }
+        deleteConfirmButton.click();
+
+        boolean isDeleteAccountSuccess = false;
+        int afterDeleteAccountListLength = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
+
+        for(int i = 1 ; i <= afterDeleteAccountListLength; i++ ) {
+            String xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/" +
+                    "android.view.ViewGroup["+ i + "]/android.widget.TextView";
+            if(driver.findElementByXPath(xpath).getText().equals(deletedAccountName)){
+                isDeleteAccountSuccess = true;
+                break;
+            }
+        }
+
+        assertFalse(isDeleteAccountSuccess);
     }
 }

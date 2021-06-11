@@ -86,6 +86,57 @@ public class AddNewAccountTest extends AbstractTest {
     }
 
     @Test
+    public void Test_add_account_alternative_path_with_cancel_Expected_cancel_add_account() {
+        //InputData
+        String accountName = "新增帳戶alternativepath";
+        String accountType = "一般";
+        String amount = "12005";
+        String comment = "會被取消";
+        try {
+            buttonNavigationBar.getAdvanceFunctionsButton().click();
+        } catch(org.openqa.selenium.NoSuchElementException e) {
+            buttonNavigationBar.move(865,2024,995,2100);
+        }
+        advanceFunctionsPage.getAccountOrderButton().click();
+        MobileElement addNewAccountButton = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/btn_create");
+        addNewAccountButton.click();
+
+        MobileElement inputAccountNameField = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/et_name");
+        inputAccountNameField.click();
+        inputAccountNameField.sendKeys(accountName);
+
+        MobileElement inputTypeField = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/tv_type");
+        inputTypeField.click();
+        accountTypeSelector.getType(accountType).click();
+
+        MobileElement inputQuotaField = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/tv_current_amount");
+        inputQuotaField.click();
+        for (char ch: amount.toCharArray()) {
+            calculator.getButton(ch).click();
+        }
+        calculator.getOk().click();
+
+        MobileElement inputCommentField = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/et_note");
+        inputCommentField.click();
+        inputCommentField.sendKeys(comment);
+
+        MobileElement cancelButton = (MobileElement) driver.findElementByAccessibilityId("Navigate up");
+        cancelButton.click();
+
+        boolean isCreateNewAccountCancel = true;
+        int accountListlength = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
+        for(int i = 1 ; i <= accountListlength; i++ ) {
+            String xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/" +
+                    "android.view.ViewGroup["+ i + "]/android.widget.TextView";
+            if(driver.findElementByXPath(xpath).getText().equals(accountName)){
+                isCreateNewAccountCancel = false;
+            }
+
+        }
+        assertTrue(isCreateNewAccountCancel);
+    }
+
+    @Test
     public void Test_add_account_T1_byECC_Expected_Input_Prompt() {
         //InputData
         String accountName = null;

@@ -41,14 +41,12 @@ public class EditAccountTest extends AbstractTest {
     @Override
     public void tearDown() {
         super.tearDown();
-        System.out.println("tearDown:" + driver.getContext());
-        System.out.println(driver.getContext().equals("NATIVE_APP"));
 
-        if(!driver.getContext().equals("clickCreatedAccountNATIVE_APP_") &&
-                this.afterAccountName.equals(this.accountName)) {
+        if(driver.currentActivity().equals("com.coceany.kokosaver.page.account.CreateAccountActivity")) {
             MobileElement backToAccountListButton = (MobileElement) driver.findElementByAccessibilityId("Navigate up");
             backToAccountListButton.click();
         }
+
         this.delete_the_specific_account(this.afterAccountName);
         if (driver != null) {
             driver.closeApp();// close APP
@@ -61,8 +59,6 @@ public class EditAccountTest extends AbstractTest {
             String xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/" +
                     "android.view.ViewGroup["+ i + "]/android.widget.TextView";
             if(driver.findElementByXPath(xpath).getText().equals(this.accountName)){
-                String url = driver.getContext();
-                System.out.println("clickCreatedAccount" + url);
                 driver.findElementByXPath(xpath).click();
                 break;
             }
@@ -103,7 +99,8 @@ public class EditAccountTest extends AbstractTest {
 
         MobileElement saveButton = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/btn_save");
         saveButton.click();
-
+        String activity = driver.currentActivity();
+        System.out.println("T1:" + activity);
         this.afterAccountName = editAccountName;
 
         boolean isEditNewAccountSuccess = false;
@@ -117,6 +114,56 @@ public class EditAccountTest extends AbstractTest {
             }
         }
         assertTrue(isEditNewAccountSuccess);
+
+    }
+
+    @Test
+    public void Test_edit_account_alternative_path_with_cancel_Expected_the_account_not_be_deleted() {
+        //InputData
+        String editAccountName = "自動化生成測試帳戶_編輯alternativepath";
+        String editAccountType = "一般";
+        String editAmount = "878";
+        String editComment = "要取消囉";
+
+        this.clickCreatedAccount();//find the create account and click it
+
+        MobileElement inputAccountNameField = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/et_name");
+        inputAccountNameField.clear();
+        inputAccountNameField.click();
+        inputAccountNameField.sendKeys(editAccountName);
+
+        MobileElement inputTypeField = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/tv_type");
+        inputTypeField.click();
+        accountTypeSelector.getType(editAccountType).click();
+
+        MobileElement inputQuotaField = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/tv_current_amount");
+        inputQuotaField.clear();
+        inputQuotaField.click();
+        for (char ch: editAmount.toCharArray()) {
+            calculator.getButton(ch).click();
+        }
+        calculator.getOk().click();
+
+        MobileElement inputCommentField = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/et_note");
+        inputCommentField.clear();
+        inputCommentField.click();
+        inputCommentField.sendKeys(editComment);
+
+        MobileElement cancelButton = (MobileElement) driver.findElementByAccessibilityId("Navigate up");
+        cancelButton.click();
+
+
+        boolean isCancelEditAccountSuccess = false;
+        int aftAccountListlength = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
+        for(int i = 1 ; i <= aftAccountListlength; i++ ) {
+            String xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/" +
+                    "android.view.ViewGroup["+ i + "]/android.widget.TextView";
+            if(driver.findElementByXPath(xpath).getText().equals(this.accountName)){
+                isCancelEditAccountSuccess = true;
+                break;
+            }
+        }
+        assertTrue(isCancelEditAccountSuccess);
 
     }
 
@@ -161,16 +208,14 @@ public class EditAccountTest extends AbstractTest {
         }catch(IllegalArgumentException e) {
             assertEquals(IllegalArgumentException.class, e.getClass());
         }
-
         MobileElement saveButton = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/btn_save");
         saveButton.click();
-        this.afterAccountName = this.accountName;
         assertEquals("欄位還沒有填完喔！",driver.findElementByXPath("/hierarchy/android.widget.Toast").getText());
 
     }
 
     @Test
-    public void Test_edit_account_T2_byECC_Expected_get_Amount_warning() {
+    public void Test_edit_account_T2_byECC_Expected_get_Amount_should_not_be_negative() {
         //InputData
         String editAccountName = " ";
         String editAccountType = "信用卡";
@@ -181,8 +226,8 @@ public class EditAccountTest extends AbstractTest {
         String editComment = " ";
 
         this.clickCreatedAccount();//find the create account and click it
-        String url = driver.getContext();
-        System.out.println("T2" + url);
+        String activity = driver.currentActivity();
+        System.out.println("T2:" + activity);
 
         MobileElement inputAccountNameField = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/et_name");
         inputAccountNameField.clear();
@@ -220,8 +265,6 @@ public class EditAccountTest extends AbstractTest {
         inputCommentField.clear();
         inputCommentField.click();
         inputCommentField.sendKeys(editComment);
-
-        System.out.println(this.afterAccountName);
 
         //Before add ,should check is Amount negative
         String amountField = driver.findElementById("com.coceany.piggyaccounting:id/tv_current_amount").getText();
@@ -567,12 +610,9 @@ public class EditAccountTest extends AbstractTest {
     private void delete_the_specific_account(String deletedAccountName) {
         MobileElement preCreatedAccount = null ;
         int accountListlength = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
-        System.out.println(accountListlength);
         for(int i = 1 ; i <= accountListlength; i++ ) {
             String xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/" +
                     "android.view.ViewGroup["+ i + "]/android.widget.TextView";
-            System.out.println(xpath);
-            System.out.println(driver.findElementByXPath(xpath).getText());
             if(driver.findElementByXPath(xpath).getText().equals(deletedAccountName)){
                 preCreatedAccount = driver.findElementByXPath(xpath);
                 break;
