@@ -19,11 +19,12 @@ public class AddCategoryTest extends AbstractTest {
     @Override
     public void setUp() throws MalformedURLException {
         super.setUp();
-
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS); //wait for app opening
     }
 
+
     @Test
-    public void Test_add_expense_category_T1_byECC_Test_add_expense_category_happypath(){
+    public void Test_add_expense_category_happypath(){
         String expenseCategoryName = "支出類別新增測試我要大於五十字我要大於五十字我要大於五十字我要大於五十字我要大於五十字我要大於五十字我要大於五十字";
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.findElementById("com.coceany.piggyaccounting:id/iv_profile").click();
@@ -64,7 +65,84 @@ public class AddCategoryTest extends AbstractTest {
     }
 
     @Test
-    public void Test_add_expense_category_T2_byECC_Test_add_both_category(){
+    public void Test_add_income_category_happypath(){
+        String incomeCategoryName = "收入類別新增測試";
+        driver.manage().timeouts().implicitlyWait(6, TimeUnit.SECONDS);
+        driver.findElementById("com.coceany.piggyaccounting:id/iv_profile").click();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout[2]/android.widget.FrameLayout[3]/android.view.ViewGroup").click();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.findElementById("com.coceany.piggyaccounting:id/btn_create").click();
+        MobileElement el = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/et_name");
+        el.click();
+        el.sendKeys(incomeCategoryName);
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.findElementById("com.coceany.piggyaccounting:id/cb_income_category").click();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.findElementById("com.coceany.piggyaccounting:id/btn_save").click();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+
+        // assert
+        int categoryListLength = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
+        System.out.println("categoryListLength1="+categoryListLength);
+        boolean isCreateNewIncomeCategorySuccess = false;
+        int index = 1;
+        for(index = 1; index <= categoryListLength; index++){
+            String xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[" + index + "]/android.widget.TextView";
+            if(driver.findElementByXPath(xpath).getText().equals(incomeCategoryName)){
+                isCreateNewIncomeCategorySuccess = true;
+                break;
+            }
+        }
+        assertTrue(isCreateNewIncomeCategorySuccess);
+
+        // delete
+        delete_category("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[" + index + "]/android.widget.TextView");
+    }
+
+    @Test
+    public void Test_add_expense_category_T1_byECC_Expected_add_category_success(){
+        String expenseCategoryName = "支出類別新增測試我要大於五十字我要大於五十字我要大於五十字我要大於五十字我要大於五十字我要大於五十字我要大於五十字";
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.findElementById("com.coceany.piggyaccounting:id/iv_profile").click();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout[2]/android.widget.FrameLayout[2]/android.view.ViewGroup").click();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.findElementById("com.coceany.piggyaccounting:id/btn_create").click();
+        MobileElement el = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/et_name");
+        el.click();
+        el.sendKeys(expenseCategoryName);
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.findElementById("com.coceany.piggyaccounting:id/cb_expense_category").click();
+        driver.findElementById("com.coceany.piggyaccounting:id/btn_save").click();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+
+        // return first
+//        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+//        driver.findElementByAccessibilityId("Navigate up").click();
+//        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+//        driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout[2]/android.widget.FrameLayout[2]/android.view.ViewGroup").click();
+
+        // assert
+        int categoryListLength = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
+        System.out.println("categoryListLength="+categoryListLength);
+        boolean isCreateNewExpenseCategorySuccess = false;
+        int index = 1;
+        for(index = 1; index <= categoryListLength; index++){
+            String xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[" + index + "]/android.widget.TextView";
+            if(driver.findElementByXPath(xpath).getText().equals(expenseCategoryName)){
+                isCreateNewExpenseCategorySuccess = true;
+                break;
+            }
+        }
+        assertTrue(isCreateNewExpenseCategorySuccess);
+
+        // delete
+        delete_category("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[" + index + "]/android.widget.TextView");
+    }
+
+    @Test
+    public void Test_add_expense_category_T2_byECC_Expected_add_category_success(){
         String categoryName = "收入和支出類別新增測試";
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.findElementById("com.coceany.piggyaccounting:id/iv_profile").click();
@@ -131,7 +209,7 @@ public class AddCategoryTest extends AbstractTest {
     }
 
     @Test
-    public void Test_add_expense_category_T3_byECC_Test_add_expense_space_and_income_category(){
+    public void Test_add_expense_category_T3_byECC_Expected_add_category_success(){
         String expenseCategoryName = " ";
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.findElementById("com.coceany.piggyaccounting:id/iv_profile").click();
@@ -172,7 +250,7 @@ public class AddCategoryTest extends AbstractTest {
     }
 
     @Test
-    public void Test_add_expense_category_T4_byECC_Test_add_expense_with_null_name_and_null_category(){
+    public void Test_add_expense_category_T4_byECC_Expected_get_warning(){
         String expenseCategoryName = "";
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.findElementById("com.coceany.piggyaccounting:id/iv_profile").click();
@@ -189,7 +267,7 @@ public class AddCategoryTest extends AbstractTest {
     }
 
     @Test
-    public void Test_add_income_category_T1_byECC_Test_add_income_category_happypath(){
+    public void Test_add_income_category_T1_byECC_Expected_add_category_success(){
         String incomeCategoryName = "收入類別新增測試";
         driver.manage().timeouts().implicitlyWait(6, TimeUnit.SECONDS);
         driver.findElementById("com.coceany.piggyaccounting:id/iv_profile").click();
@@ -225,7 +303,7 @@ public class AddCategoryTest extends AbstractTest {
     }
 
     @Test
-    public void Test_add_income_category_T2_byECC_Test_add_income_space_and_expense_category(){
+    public void Test_add_income_category_T2_byECC_Expected_add_category_success(){
         String incomeCategoryName = " ";
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.findElementById("com.coceany.piggyaccounting:id/iv_profile").click();
@@ -266,7 +344,7 @@ public class AddCategoryTest extends AbstractTest {
     }
 
     @Test
-    public void Test_add_income_category_T3_byECC_Test_add_income_with_null_category(){
+    public void Test_add_income_category_T3_byECC_Expected_get_warning(){
         String incomeCategoryName = "收入類別新增測試我要大於五十字我要大於五十字我要大於五十字我要大於五十字我要大於五十字我要大於五十字我要大於五十字";
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.findElementById("com.coceany.piggyaccounting:id/iv_profile").click();
@@ -286,7 +364,7 @@ public class AddCategoryTest extends AbstractTest {
     }
 
     @Test
-    public void Test_add_income_category_T4_byECC_Test_add_income_with_null_name_and_both_category(){
+    public void Test_add_income_category_T4_byECC_Expected_get_warning(){
         String incomeCategoryName = "";
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.findElementById("com.coceany.piggyaccounting:id/iv_profile").click();
