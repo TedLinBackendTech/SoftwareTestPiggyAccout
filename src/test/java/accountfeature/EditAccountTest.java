@@ -121,7 +121,7 @@ public class EditAccountTest extends AbstractTest {
     }
 
     @Test
-    public void Test_edit_account_T1_byECC_Expected_get_warning() {
+    public void Test_edit_account_T1_byECC_Expected_Input_Prompt() {
         //InputData
 
         String editAccountName = null;
