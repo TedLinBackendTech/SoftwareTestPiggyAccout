@@ -43,7 +43,6 @@ public class DeleteExpenseTest extends AbstractTest {
         MobileElement chosenDate = (MobileElement) driver.findElementByAccessibilityId(Date);
         chosenDate.click();
 
-
         MobileElement amountButton = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/tv_amount");
         amountButton.clear();
         amountButton.click();
@@ -51,7 +50,6 @@ public class DeleteExpenseTest extends AbstractTest {
         calculator.getZero().click();
         calculator.getDblZero().click();
         calculator.getOk();
-
 
         MobileElement categoryButton = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/tv_category");
         categoryButton.click();
