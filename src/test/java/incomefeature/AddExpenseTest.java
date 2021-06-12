@@ -363,8 +363,10 @@ public class AddExpenseTest extends AbstractTest {
         //備註
         MobileElement commentButton = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/et_note");
         commentButton.click();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         commentButton.sendKeys(comment);
 
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         MobileElement saveButton = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/btn_save");
         saveButton.click();
 
@@ -386,7 +388,7 @@ public class AddExpenseTest extends AbstractTest {
             }
         }
         assertTrue(isCreateNewExpensetSuccess);
-
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         //刪除該收支紀錄
         this.delete_temp_data();
         //刪除測試類別
@@ -402,7 +404,6 @@ public class AddExpenseTest extends AbstractTest {
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         delete_a_regulation(regulation);
         driver.navigate().back();
-        driver.manage().timeouts().implicitlyWait(6, TimeUnit.SECONDS);
     }
 
     @Test
