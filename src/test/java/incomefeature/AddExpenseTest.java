@@ -17,6 +17,7 @@ public class AddExpenseTest extends AbstractTest {
     @Override
     public void setUp() throws MalformedURLException {
        super.setUp();
+       driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS); //wait for app opening
     }
 
     private void create_a_simple_expense(String date, String money, String category, String accountName, String comment) {
@@ -288,28 +289,29 @@ public class AddExpenseTest extends AbstractTest {
         saveButton.click();
 
         assertEquals("發票格式錯誤！",driver.findElementByXPath("/hierarchy/android.widget.Toast").getText());
+        driver.manage().timeouts().implicitlyWait(6, TimeUnit.SECONDS);
     }
 
     @Test
     public void Test_add_expense_tc3(){
 
         String date="28 June 2021";
-        String money="-1000";
+        String money="1200-2000=";
         String category="收入類別新增測試";
         String accountName="測試銀行帳號";
         String regulation= "測試週期";
         String comment="收入類別新增測試我要大於五十字我要大於五十字我要大於五十字我要大於五十字我要大於五十字我要大於五十字我要大於五十字";
-
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         //創立使用者自訂類別
         create_a_category(category);
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         driver.navigate().back();
 
-        // todo:使用者創建帳戶
+        // 使用者創建帳戶
         create_a_account(accountName);
         driver.navigate().back();
 
-        // todo:使用者創建週期
+        // 使用者創建週期
         create_a_regulation(regulation);
         driver.navigate().back();
 
@@ -400,6 +402,7 @@ public class AddExpenseTest extends AbstractTest {
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         delete_a_regulation(regulation);
         driver.navigate().back();
+        driver.manage().timeouts().implicitlyWait(6, TimeUnit.SECONDS);
     }
 
     @Test
@@ -478,6 +481,7 @@ public class AddExpenseTest extends AbstractTest {
         }
         assertTrue(isCreateNewExpensetSuccess);
         this.delete_temp_data();
+        driver.manage().timeouts().implicitlyWait(6, TimeUnit.SECONDS);
     }
 
     @Test
