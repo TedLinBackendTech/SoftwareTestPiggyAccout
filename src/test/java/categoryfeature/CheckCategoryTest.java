@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import testUtil.AbstractTest;
 
 import java.net.MalformedURLException;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertTrue;
@@ -28,11 +29,17 @@ public class CheckCategoryTest extends AbstractTest {
 
         // assert there has preset category
         int categoryListLength = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
-        boolean hasCategory = false;
-        if(categoryListLength > 0){
-            hasCategory = true;
+        String[] expenseCategoryList = {"早餐", "午餐", "晚餐", "生活用品", "服飾", "交通", "飲料", "醫療", "投資", "娛樂", "進修", "其他"};
+        boolean hasAllPresetCategory = true;
+        int index = 1;
+        for(index = 1; index <= categoryListLength; index++){
+            String xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[" + index + "]/android.widget.TextView";
+            if(!driver.findElementByXPath(xpath).getText().equals(expenseCategoryList[index-1])){
+                hasAllPresetCategory = false;
+                break;
+            }
         }
-        assertTrue(hasCategory);
+        assertTrue(hasAllPresetCategory);
     }
 
     @Test
@@ -45,11 +52,17 @@ public class CheckCategoryTest extends AbstractTest {
 
         // assert there has preset category
         int categoryListLength = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
-        boolean hasCategory = false;
-        if(categoryListLength > 0){
-            hasCategory = true;
+        String[] incomeCategoryList = {"投資", "薪資", "其他"};
+        boolean hasAllPresetCategory = true;
+        int index = 1;
+        for(index = 1; index <= categoryListLength; index++){
+            String xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[" + index + "]/android.widget.TextView";
+            if(!driver.findElementByXPath(xpath).getText().equals(incomeCategoryList[index-1])){
+                hasAllPresetCategory = false;
+                break;
+            }
         }
-        assertTrue(hasCategory);
+        assertTrue(hasAllPresetCategory);
     }
 
 }
