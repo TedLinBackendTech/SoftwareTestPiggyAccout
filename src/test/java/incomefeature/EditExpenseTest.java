@@ -276,6 +276,7 @@ public class EditExpenseTest extends AbstractTest {
 
         assertEquals("發票格式錯誤！",driver.findElementByXPath("/hierarchy/android.widget.Toast").getText());
         driver.manage().timeouts().implicitlyWait(6, TimeUnit.SECONDS);
+        driver.navigate().back();
     }
 
     @Test
@@ -341,39 +342,13 @@ public class EditExpenseTest extends AbstractTest {
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         commentButton.sendKeys(comment);
 
+        driver.navigate().back();
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         MobileElement saveButton = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/btn_save");
+        //Before add ,should check is Amount negative
+        String amountField = driver.findElementById("com.coceany.piggyaccounting:id/tv_amount").getText();
+        assertTrue(!amountField.contains("-"));
         saveButton.click();
-
-        boolean isCreateNewExpensetSuccess = true;
-        int expenseListlength = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
-
-        for(int i = 1 ; i <= expenseListlength; i++ ) {
-            String xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup";
-            String EIxpath_account = xpath + "[" + i + "]/android.widget.TextView[1]";
-            String EIxpath_category = xpath + "[" + i + "]/android.widget.TextView[2]";
-            String EIxpath_comment = xpath + "[" + i + "]/android.widget.TextView[3]";
-            String EIxpath_amount = xpath + "[" + i + "]/android.widget.TextView[4]";
-            if(driver.findElementByXPath(EIxpath_account).getText().equals("其他") &&
-                    driver.findElementByXPath(EIxpath_category).getText().equals("午餐") &&
-                    driver.findElementByXPath(EIxpath_comment).getText().equals(" ") &&
-                    driver.findElementByXPath(EIxpath_amount).getText().equals("$1,000")){
-                isCreateNewExpensetSuccess = false;
-                break;
-            }
-        }
-        assertTrue(isCreateNewExpensetSuccess);
-        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-        //刪除該收支紀錄
-        this.delete_temp_data();
-        //刪除測試類別
-        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-        delete_category(category);
-        driver.navigate().back();
-        //刪除測試帳戶
-        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-        delete_a_account(accountName);
-        driver.navigate().back();
     }
 
     @Test
@@ -522,6 +497,29 @@ public class EditExpenseTest extends AbstractTest {
         }
         assertTrue(!isEditExpensetSuccess);
         delete_temp_data();
+    }
+    @AfterMethod
+    @Override
+    public void tearDown() {
+        String category="支出類別新增測試";
+        String accountName="測試銀行帳號";
+        if(driver.currentActivity().equals("com.coceany.kokosaver.page.record.CreateRecordActivity")) {
+            driver.navigate().back();
+            //刪除測試類別
+            driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+            delete_category(category);
+            driver.navigate().back();
+            //刪除測試帳戶
+            driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+            delete_a_account(accountName);
+            driver.navigate().back();
+
+        }
+        super.tearDown();
+        if (driver != null){
+            driver.closeApp();
+            driver.quit();
+        }
     }
 }
 

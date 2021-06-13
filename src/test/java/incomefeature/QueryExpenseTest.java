@@ -68,12 +68,18 @@ public class QueryExpenseTest extends AbstractTest {
         assertEquals("早餐",el6.getText());
     }
     @AfterMethod
-    public void delete_temp_data(){
+    @Override
+    public void tearDown() {
+        super.tearDown();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         MobileElement el2 = (MobileElement) driver.findElementByAccessibilityId("刪除");
         el2.click();
         MobileElement el3 = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/btn_confirm");
         el3.click();
+        if (driver != null){
+            driver.closeApp();
+            driver.quit();
+        }
     }
 }
 

@@ -6,6 +6,7 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import testUtil.AbstractTest;
@@ -109,5 +110,14 @@ public class DeleteExpenseTest extends AbstractTest {
         el11.click();
         MobileElement el12 = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/btn_confirm");
         el12.click();
+    }
+    @AfterMethod
+    @Override
+    public void tearDown() {
+        super.tearDown();
+        if (driver != null){
+            driver.closeApp();
+            driver.quit();
+        }
     }
 }
