@@ -430,7 +430,7 @@ public class EditExpenseTest extends AbstractTest {
     }
 
     @Test
-    public void Test_edit_expense_alternative_path_with_cancel_Expected_cancel_add_expense(){
+    public void Test_edit_expense_negative_path_with_cancel_Expected_cancel_add_expense(){
         String date="02 June 2021";
         String money="0";
         String category="早餐";//預設

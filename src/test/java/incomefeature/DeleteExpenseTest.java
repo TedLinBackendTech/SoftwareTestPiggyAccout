@@ -90,7 +90,7 @@ public class DeleteExpenseTest extends AbstractTest {
     }
 
     @Test
-    public void Test_delete_expense_alternative_path_with_cancel_Expected_cancel_delete_expense(){
+    public void Test_delete_expense_negative_path_with_cancel_Expected_cancel_delete_expense(){
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         MobileElement el0 = (MobileElement) driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[2]");
         el0.click();
