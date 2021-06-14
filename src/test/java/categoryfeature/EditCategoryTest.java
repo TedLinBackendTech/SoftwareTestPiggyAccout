@@ -119,6 +119,111 @@ public class EditCategoryTest extends AbstractTest {
     }
 
     @Test
+    public void Test_edit_expense_category_negativepath(){
+        // add new category first
+        String expenseCategoryName = "支出類別編輯取消測試";
+        String expenseCategoryEditName = "支出類別編輯測試edit";
+        this.create_new_normal_expense_category(expenseCategoryName);
+
+        // return first
+//        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+//        driver.findElementByAccessibilityId("Navigate up").click();
+//        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+//        advanceFunctionsPage.getExpenseCategoryButton().click();
+
+        // search name which need to edit
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        int categoryListLengthOrigin = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
+        System.out.println("categoryListLengthOrigin="+categoryListLengthOrigin);
+        for(int i = 1; i <= categoryListLengthOrigin; i++){
+            String xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[" + i + "]/android.widget.TextView";
+            if(driver.findElementByXPath(xpath).getText().equals(expenseCategoryName)){
+                driver.findElementByXPath(xpath).click();
+                break;
+            }
+        }
+
+        // edit
+        MobileElement el10 = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/et_name");
+        el10.clear();
+        el10.sendKeys(expenseCategoryEditName);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
+        // no save and return
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.findElementByAccessibilityId("Navigate up").click();
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+
+        // assert
+        int categoryListLength = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
+        System.out.println("categoryListLength="+categoryListLength);
+        boolean isEditCancelExpenseCategorySuccess = false;
+        int index = 1;
+        String deletePath = "";
+        for(index = 1; index <= categoryListLength; index++){
+            String xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[" + index + "]/android.widget.TextView";
+            if(driver.findElementByXPath(xpath).getText().equals(expenseCategoryName)){
+                isEditCancelExpenseCategorySuccess = true;
+                deletePath = xpath;
+                break;
+            }
+        }
+        assertTrue(isEditCancelExpenseCategorySuccess);
+
+        // delete
+        this.delete_category(deletePath);
+    }
+
+    @Test
+    public void Test_edit_income_category_negativepath(){
+        // add new category first
+        String incomeCategoryName = "收入類別編輯取消測試";
+        String incomeCategoryEditName = "收入類別編輯測試edit";
+        this.create_new_normal_income_category(incomeCategoryName);
+
+        // search name which need to edit
+        int categoryListLengthOrigin = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
+        System.out.println("categoryListLengthOrigin="+categoryListLengthOrigin);
+        for(int i = 1; i <= categoryListLengthOrigin; i++){
+            String xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[" + i + "]/android.widget.TextView";
+            if(driver.findElementByXPath(xpath).getText().equals(incomeCategoryName)){
+                driver.findElementByXPath(xpath).click();
+                break;
+            }
+        }
+
+        // edit
+        MobileElement el10 = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/et_name");
+        el10.clear();
+        el10.sendKeys(incomeCategoryEditName);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
+        // no save and return
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.findElementByAccessibilityId("Navigate up").click();
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+
+        // assert
+        int categoryListLength = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
+        System.out.println("categoryListLength="+categoryListLength);
+        boolean isEditCancelIncomeCategorySuccess = false;
+        int index = 1;
+        String deletePath = "";
+        for(index = 1; index <= categoryListLength; index++){
+            String xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[" + index + "]/android.widget.TextView";
+            if(driver.findElementByXPath(xpath).getText().equals(incomeCategoryName)){
+                isEditCancelIncomeCategorySuccess = true;
+                deletePath = xpath;
+                break;
+            }
+        }
+        assertTrue(isEditCancelIncomeCategorySuccess);
+
+        // delete
+        this.delete_category(deletePath);
+    }
+
+    @Test
     public void Test_edit_expense_category_T1_byEcc_Expected_get_warning(){
         // add new category first
         String expenseCategoryName = "支出類別編輯測試";
@@ -513,6 +618,7 @@ public class EditCategoryTest extends AbstractTest {
     }
 
     private void delete_category(String deletePath){
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.findElementByXPath(deletePath).click();
         MobileElement el1 = (MobileElement) driver.findElementByAccessibilityId("刪除");
         el1.click();

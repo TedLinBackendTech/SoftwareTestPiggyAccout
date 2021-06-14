@@ -19,7 +19,7 @@ public class DeleteCategoryTest extends AbstractTest {
     }
 
     @Test
-    public void Test_delete_expense_category_happypath_a(){
+    public void Test_delete_expense_category_happypath(){
         // add new category first
         String expenseCategoryName = "支出類別刪除測試a";
         this.create_new_normal_expense_category(expenseCategoryName);
@@ -63,7 +63,7 @@ public class DeleteCategoryTest extends AbstractTest {
     }
 
     @Test
-    public void Test_delete_income_category_happypath_a(){
+    public void Test_delete_income_category_happypath(){
         // add new category first
         String incomeCategoryName = "收入類別刪除測試a";
         this.create_new_normal_income_category(incomeCategoryName);
@@ -100,7 +100,7 @@ public class DeleteCategoryTest extends AbstractTest {
     }
 
     @Test
-    public void Test_delete_expense_and_cancel_category_happypath_a(){
+    public void Test_delete_expense_category_negativepath_a(){
         // add new category first
         String expenseCategoryName = "支出類別刪除測試取消a";
         this.create_new_normal_expense_category(expenseCategoryName);
@@ -151,7 +151,7 @@ public class DeleteCategoryTest extends AbstractTest {
     }
 
     @Test
-    public void Test_delete_income_and_cancel_category_happypath_a(){
+    public void Test_delete_income_category_negativepath_a(){
         // add new category first
         String incomeCategoryName = "收入類別刪除測試取消a";
         this.create_new_normal_income_category(incomeCategoryName);
@@ -195,7 +195,7 @@ public class DeleteCategoryTest extends AbstractTest {
     }
 
     @Test
-    public void Test_delete_expense_category_happypath_b(){
+    public void Test_delete_expense_category_alternativepath(){
         // add new category first
         String expenseCategoryName = "支出類別刪除測試b";
         this.create_new_normal_expense_category(expenseCategoryName);
@@ -249,7 +249,7 @@ public class DeleteCategoryTest extends AbstractTest {
     }
 
     @Test
-    public void Test_delete_income_category_happypath_b(){
+    public void Test_delete_income_category_alternativepath(){
         // add new category first
         String incomeCategoryName = "收入類別刪除測試b";
         this.create_new_normal_income_category(incomeCategoryName);
@@ -295,7 +295,7 @@ public class DeleteCategoryTest extends AbstractTest {
     }
 
     @Test
-    public void Test_delete_expense_and_cancel_category_happypath_b(){
+    public void Test_delete_expense_category_negativepath_b(){
         // add new category first
         String expenseCategoryName = "支出類別刪除測試取消b";
         this.create_new_normal_expense_category(expenseCategoryName);
@@ -349,7 +349,7 @@ public class DeleteCategoryTest extends AbstractTest {
     }
 
     @Test
-    public void Test_delete_income_and_cancel_category_happypath_b(){
+    public void Test_delete_income_category_negativepath_b(){
         // add new category first
         String incomeCategoryName = "收入類別刪除測試取消b";
         this.create_new_normal_income_category(incomeCategoryName);

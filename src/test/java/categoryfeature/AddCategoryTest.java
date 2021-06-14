@@ -100,6 +100,78 @@ public class AddCategoryTest extends AbstractTest {
     }
 
     @Test
+    public void Test_add_expense_category_negativepath(){
+        String expenseCategoryName = "支出類別新增測試取消";
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        buttonNavigationBar.getAdvanceFunctionsButton().click();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        advanceFunctionsPage.getExpenseCategoryButton().click();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.findElementById("com.coceany.piggyaccounting:id/btn_create").click();
+        MobileElement el = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/et_name");
+        el.click();
+        el.sendKeys(expenseCategoryName);
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.findElementById("com.coceany.piggyaccounting:id/cb_expense_category").click();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+
+        // no save and return
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.findElementByAccessibilityId("Navigate up").click();
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+
+        // assert
+        int categoryListLength = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
+        System.out.println("categoryListLength="+categoryListLength);
+        boolean isCreateCancelExpenseCategorySuccess = true;
+        int index = 1;
+        for(index = 1; index <= categoryListLength; index++){
+            String xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[" + index + "]/android.widget.TextView";
+            if(driver.findElementByXPath(xpath).getText().equals(expenseCategoryName)){
+                isCreateCancelExpenseCategorySuccess = false;
+                break;
+            }
+        }
+        assertTrue(isCreateCancelExpenseCategorySuccess);
+    }
+
+    @Test
+    public void Test_add_income_category_negativepath(){
+        String incomeCategoryName = "收入類別新增測試取消";
+        driver.manage().timeouts().implicitlyWait(6, TimeUnit.SECONDS);
+        buttonNavigationBar.getAdvanceFunctionsButton().click();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        advanceFunctionsPage.getIncomeCategoryButton().click();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.findElementById("com.coceany.piggyaccounting:id/btn_create").click();
+        MobileElement el = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/et_name");
+        el.click();
+        el.sendKeys(incomeCategoryName);
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.findElementById("com.coceany.piggyaccounting:id/cb_income_category").click();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+
+        // no save and return
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.findElementByAccessibilityId("Navigate up").click();
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+
+        // assert
+        int categoryListLength = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
+        System.out.println("categoryListLength1="+categoryListLength);
+        boolean isCreateCancelIncomeCategorySuccess = true;
+        int index = 1;
+        for(index = 1; index <= categoryListLength; index++){
+            String xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[" + index + "]/android.widget.TextView";
+            if(driver.findElementByXPath(xpath).getText().equals(incomeCategoryName)){
+                isCreateCancelIncomeCategorySuccess = false;
+                break;
+            }
+        }
+        assertTrue(isCreateCancelIncomeCategorySuccess);
+    }
+
+    @Test
     public void Test_add_expense_category_T1_byECC_Expected_add_category_success(){
         String expenseCategoryName = "支出類別新增測試我要大於五十字我要大於五十字我要大於五十字我要大於五十字我要大於五十字我要大於五十字我要大於五十字";
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
