@@ -82,7 +82,7 @@ public class DeleteAccountTest extends AbstractTest {
     }
 
     @Test
-    public void Test_delete_account_alternative_path_a() {
+    public void Test_delete_account_negative_path_a() {
         String deletedAccountName = this.accountName;
         MobileElement preCreatedAccount = null ;
         int accountListlength = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
@@ -124,7 +124,7 @@ public class DeleteAccountTest extends AbstractTest {
     }
 
     @Test
-    public void Test_delete_account_happypath_b() {
+    public void Test_delete_account_alternative_path_b() {
         String deletedAccountName = this.accountName;
         MobileElement orderOrDeleteButton = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/btn_order_or_delete");
         orderOrDeleteButton.click();
@@ -168,7 +168,7 @@ public class DeleteAccountTest extends AbstractTest {
     }
 
     @Test
-    public void Test_delete_account_alternative_b() {
+    public void Test_delete_account_negative_path_b() {
         String deletedAccountName = this.accountName;
         MobileElement orderOrDeleteButton = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/btn_order_or_delete");
         orderOrDeleteButton.click();

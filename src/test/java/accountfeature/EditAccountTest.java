@@ -118,9 +118,9 @@ public class EditAccountTest extends AbstractTest {
     }
 
     @Test
-    public void Test_edit_account_alternative_path_with_cancel_Expected_the_account_not_be_deleted() {
+    public void Test_edit_account_negative_path_with_cancel_Expected_the_account_not_be_deleted() {
         //InputData
-        String editAccountName = "自動化生成測試帳戶_編輯alternativepath";
+        String editAccountName = "自動化生成測試帳戶_編輯negativepath";
         String editAccountType = "一般";
         String editAmount = "878";
         String editComment = "要取消囉";

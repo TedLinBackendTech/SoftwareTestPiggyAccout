@@ -86,9 +86,9 @@ public class AddNewAccountTest extends AbstractTest {
     }
 
     @Test
-    public void Test_add_account_alternative_path_with_cancel_Expected_cancel_add_account() {
+    public void Test_add_account_negative_path_with_cancel_Expected_cancel_add_account() {
         //InputData
-        String accountName = "新增帳戶alternativepath";
+        String accountName = "新增帳戶negativepath";
         String accountType = "一般";
         String amount = "12005";
         String comment = "會被取消";

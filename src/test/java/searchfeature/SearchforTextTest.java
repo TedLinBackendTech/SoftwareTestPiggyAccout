@@ -64,7 +64,7 @@ public class SearchforTextTest extends AbstractTest {
     }
 
     @Test
-    public void Test_search_happypath_with_meanless_words_Expect_no_result() {
+    public void Test_search_alternative_with_meanless_words_Expect_no_result() {
         // Input Data
         String searchWords = "!@####";
 
@@ -87,7 +87,7 @@ public class SearchforTextTest extends AbstractTest {
     }
 
     @Test
-    public void Test_search_alternative_path_with_click_back_button_Expect_click_success() {
+    public void Test_search_negative_path_with_click_back_button_Expect_click_success() {
         // Input Data
         String searchWords = "nothingwillbefind";
 
