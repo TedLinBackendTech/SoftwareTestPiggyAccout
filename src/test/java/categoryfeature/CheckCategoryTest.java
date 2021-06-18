@@ -21,9 +21,7 @@ public class CheckCategoryTest extends AbstractTest {
 
     @Test
     public void Test_check_expense_category_happypath(){
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        buttonNavigationBar.getAdvanceFunctionsButton().click();
-        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        buttonNavigationBar.clickAdvanceFunctionsButtonInbuttonNavigationBar();
         advanceFunctionsPage.getExpenseCategoryButton().click();
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 
@@ -44,9 +42,7 @@ public class CheckCategoryTest extends AbstractTest {
 
     @Test
     public void Test_query_income_category_happypath(){
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        buttonNavigationBar.getAdvanceFunctionsButton().click();
-        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        buttonNavigationBar.clickAdvanceFunctionsButtonInbuttonNavigationBar();
         advanceFunctionsPage.getIncomeCategoryButton().click();
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 

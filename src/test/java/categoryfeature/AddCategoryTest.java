@@ -25,9 +25,8 @@ public class AddCategoryTest extends AbstractTest {
     @Test
     public void Test_add_expense_category_happypath(){
         String expenseCategoryName = "支出類別新增測試我要大於五十字我要大於五十字我要大於五十字我要大於五十字我要大於五十字我要大於五十字我要大於五十字";
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        buttonNavigationBar.getAdvanceFunctionsButton().click();
-        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        buttonNavigationBar.clickAdvanceFunctionsButtonInbuttonNavigationBar();
+
         advanceFunctionsPage.getExpenseCategoryButton().click();
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         driver.findElementById("com.coceany.piggyaccounting:id/btn_create").click();
@@ -38,7 +37,7 @@ public class AddCategoryTest extends AbstractTest {
         driver.findElementById("com.coceany.piggyaccounting:id/cb_expense_category").click();
         driver.findElementById("com.coceany.piggyaccounting:id/btn_save").click();
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-
+        swipeUtil.SwipeDown();
         // return first
 //        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 //        driver.findElementByAccessibilityId("Navigate up").click();
@@ -66,9 +65,8 @@ public class AddCategoryTest extends AbstractTest {
     @Test
     public void Test_add_income_category_happypath(){
         String incomeCategoryName = "收入類別新增測試";
-        driver.manage().timeouts().implicitlyWait(6, TimeUnit.SECONDS);
-        buttonNavigationBar.getAdvanceFunctionsButton().click();
-        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        buttonNavigationBar.clickAdvanceFunctionsButtonInbuttonNavigationBar();
+
         advanceFunctionsPage.getIncomeCategoryButton().click();
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         driver.findElementById("com.coceany.piggyaccounting:id/btn_create").click();
@@ -80,7 +78,7 @@ public class AddCategoryTest extends AbstractTest {
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         driver.findElementById("com.coceany.piggyaccounting:id/btn_save").click();
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-
+        swipeUtil.SwipeDown();
         // assert
         int categoryListLength = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
         System.out.println("categoryListLength1="+categoryListLength);
@@ -102,9 +100,8 @@ public class AddCategoryTest extends AbstractTest {
     @Test
     public void Test_add_expense_category_negativepath(){
         String expenseCategoryName = "支出類別新增測試取消";
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        buttonNavigationBar.getAdvanceFunctionsButton().click();
-        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        buttonNavigationBar.clickAdvanceFunctionsButtonInbuttonNavigationBar();
+
         advanceFunctionsPage.getExpenseCategoryButton().click();
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         driver.findElementById("com.coceany.piggyaccounting:id/btn_create").click();
@@ -138,9 +135,7 @@ public class AddCategoryTest extends AbstractTest {
     @Test
     public void Test_add_income_category_negativepath(){
         String incomeCategoryName = "收入類別新增測試取消";
-        driver.manage().timeouts().implicitlyWait(6, TimeUnit.SECONDS);
-        buttonNavigationBar.getAdvanceFunctionsButton().click();
-        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        buttonNavigationBar.clickAdvanceFunctionsButtonInbuttonNavigationBar();
         advanceFunctionsPage.getIncomeCategoryButton().click();
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         driver.findElementById("com.coceany.piggyaccounting:id/btn_create").click();
@@ -174,9 +169,8 @@ public class AddCategoryTest extends AbstractTest {
     @Test
     public void Test_add_expense_category_T1_byECC_Expected_add_category_success(){
         String expenseCategoryName = "支出類別新增測試我要大於五十字我要大於五十字我要大於五十字我要大於五十字我要大於五十字我要大於五十字我要大於五十字";
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        buttonNavigationBar.getAdvanceFunctionsButton().click();
-        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+
+        buttonNavigationBar.clickAdvanceFunctionsButtonInbuttonNavigationBar();
         advanceFunctionsPage.getExpenseCategoryButton().click();
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         driver.findElementById("com.coceany.piggyaccounting:id/btn_create").click();
@@ -187,12 +181,7 @@ public class AddCategoryTest extends AbstractTest {
         driver.findElementById("com.coceany.piggyaccounting:id/cb_expense_category").click();
         driver.findElementById("com.coceany.piggyaccounting:id/btn_save").click();
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-
-        // return first
-//        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-//        driver.findElementByAccessibilityId("Navigate up").click();
-//        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-//        advanceFunctionsPage.getExpenseCategoryButton().click();
+        swipeUtil.SwipeDown();
 
         // assert
         int categoryListLength = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
@@ -215,9 +204,9 @@ public class AddCategoryTest extends AbstractTest {
     @Test
     public void Test_add_expense_category_T2_byECC_Expected_add_category_success(){
         String categoryName = "收入和支出類別新增測試";
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        buttonNavigationBar.getAdvanceFunctionsButton().click();
-        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+
+        buttonNavigationBar.clickAdvanceFunctionsButtonInbuttonNavigationBar();
+
         advanceFunctionsPage.getExpenseCategoryButton().click();
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         driver.findElementById("com.coceany.piggyaccounting:id/btn_create").click();
@@ -230,13 +219,8 @@ public class AddCategoryTest extends AbstractTest {
         driver.findElementById("com.coceany.piggyaccounting:id/cb_income_category").click();
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         driver.findElementById("com.coceany.piggyaccounting:id/btn_save").click();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
-        // return first
-//        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-//        driver.findElementByAccessibilityId("Navigate up").click();
-//        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-//        advanceFunctionsPage.getExpenseCategoryButton().click();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        swipeUtil.SwipeDown();
 
         // expense assert
         int expenseCategoryListLength = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
@@ -256,6 +240,7 @@ public class AddCategoryTest extends AbstractTest {
         delete_category("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[" + index + "]/android.widget.TextView");
 
         // return first
+        swipeUtil.SwipeLeft();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.findElementByAccessibilityId("Navigate up").click();
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
@@ -282,9 +267,7 @@ public class AddCategoryTest extends AbstractTest {
     @Test
     public void Test_add_expense_category_T3_byECC_Expected_add_category_success(){
         String expenseCategoryName = " ";
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        buttonNavigationBar.getAdvanceFunctionsButton().click();
-        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        buttonNavigationBar.clickAdvanceFunctionsButtonInbuttonNavigationBar();
         advanceFunctionsPage.getExpenseCategoryButton().click();
         driver.findElementById("com.coceany.piggyaccounting:id/btn_create").click();
         MobileElement el = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/et_name");
@@ -296,11 +279,11 @@ public class AddCategoryTest extends AbstractTest {
         driver.findElementById("com.coceany.piggyaccounting:id/btn_save").click();
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 
-        // return first
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.findElementByAccessibilityId("Navigate up").click();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         advanceFunctionsPage.getIncomeCategoryButton().click();
+
+        swipeUtil.SwipeDown();
 
         // assert
         int categoryListLength = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
@@ -323,9 +306,8 @@ public class AddCategoryTest extends AbstractTest {
     @Test
     public void Test_add_expense_category_T4_byECC_Expected_get_warning(){
         String expenseCategoryName = "";
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        buttonNavigationBar.getAdvanceFunctionsButton().click();
-        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        buttonNavigationBar.clickAdvanceFunctionsButtonInbuttonNavigationBar();
+
         advanceFunctionsPage.getExpenseCategoryButton().click();
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         driver.findElementById("com.coceany.piggyaccounting:id/btn_create").click();
@@ -340,9 +322,8 @@ public class AddCategoryTest extends AbstractTest {
     @Test
     public void Test_add_income_category_T1_byECC_Expected_add_category_success(){
         String incomeCategoryName = "收入類別新增測試";
-        driver.manage().timeouts().implicitlyWait(6, TimeUnit.SECONDS);
-        buttonNavigationBar.getAdvanceFunctionsButton().click();
-        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        buttonNavigationBar.clickAdvanceFunctionsButtonInbuttonNavigationBar();
+
         advanceFunctionsPage.getIncomeCategoryButton().click();
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         driver.findElementById("com.coceany.piggyaccounting:id/btn_create").click();
@@ -354,6 +335,8 @@ public class AddCategoryTest extends AbstractTest {
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         driver.findElementById("com.coceany.piggyaccounting:id/btn_save").click();
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+
+        swipeUtil.SwipeDown();
 
         // assert
         int categoryListLength = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
@@ -376,9 +359,9 @@ public class AddCategoryTest extends AbstractTest {
     @Test
     public void Test_add_income_category_T2_byECC_Expected_add_category_success(){
         String incomeCategoryName = " ";
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        buttonNavigationBar.getAdvanceFunctionsButton().click();
-        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        buttonNavigationBar.clickAdvanceFunctionsButtonInbuttonNavigationBar();
+
+
         advanceFunctionsPage.getIncomeCategoryButton().click();
         driver.findElementById("com.coceany.piggyaccounting:id/btn_create").click();
         MobileElement el = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/et_name");
@@ -390,12 +373,12 @@ public class AddCategoryTest extends AbstractTest {
         driver.findElementById("com.coceany.piggyaccounting:id/btn_save").click();
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 
-        // return first
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+//        // return first
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         driver.findElementByAccessibilityId("Navigate up").click();
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         advanceFunctionsPage.getExpenseCategoryButton().click();
-
+        swipeUtil.SwipeDown();
         // assert
         int categoryListLength = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
         System.out.println("categoryListLength1="+categoryListLength);
@@ -417,9 +400,9 @@ public class AddCategoryTest extends AbstractTest {
     @Test
     public void Test_add_income_category_T3_byECC_Expected_get_warning(){
         String incomeCategoryName = "收入類別新增測試我要大於五十字我要大於五十字我要大於五十字我要大於五十字我要大於五十字我要大於五十字我要大於五十字";
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        buttonNavigationBar.getAdvanceFunctionsButton().click();
-        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        buttonNavigationBar.clickAdvanceFunctionsButtonInbuttonNavigationBar();
+
+
         advanceFunctionsPage.getIncomeCategoryButton().click();
         driver.findElementById("com.coceany.piggyaccounting:id/btn_create").click();
         MobileElement el = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/et_name");
@@ -437,9 +420,9 @@ public class AddCategoryTest extends AbstractTest {
     @Test
     public void Test_add_income_category_T4_byECC_Expected_get_warning(){
         String incomeCategoryName = "";
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        buttonNavigationBar.getAdvanceFunctionsButton().click();
-        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        buttonNavigationBar.clickAdvanceFunctionsButtonInbuttonNavigationBar();
+
+
         advanceFunctionsPage.getIncomeCategoryButton().click();
         driver.findElementById("com.coceany.piggyaccounting:id/btn_create").click();
         MobileElement el = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/et_name");
@@ -457,7 +440,6 @@ public class AddCategoryTest extends AbstractTest {
 
         assertEquals("名稱不能空白喔！",driver.findElementByXPath("/hierarchy/android.widget.Toast").getText());
     }
-
 
     private void delete_category(String deletePath){
         driver.findElementByXPath(deletePath).click();

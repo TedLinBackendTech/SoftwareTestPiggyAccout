@@ -19,6 +19,7 @@ public abstract class AbstractTest {
     public ButtonNavigationBar buttonNavigationBar;
     public AdvanceFunctionsPage advanceFunctionsPage;
     public ElementUtil elementUtil;
+    public SwipeUtil swipeUtil;
     @BeforeMethod
     public void setUp() throws MalformedURLException {
         DesiredCapabilities caps = new DesiredCapabilities();
@@ -42,6 +43,7 @@ public abstract class AbstractTest {
         buttonNavigationBar = new ButtonNavigationBar(driver);
         advanceFunctionsPage = new AdvanceFunctionsPage(driver);
         elementUtil = new ElementUtil(driver);
+        swipeUtil = new SwipeUtil(driver);
     }
 
     @AfterMethod

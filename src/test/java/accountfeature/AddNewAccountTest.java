@@ -39,11 +39,8 @@ public class AddNewAccountTest extends AbstractTest {
         String accountType = "一般";
         String amount = "1200";
         String comment = "薪轉戶";
-        try {
-            buttonNavigationBar.getAdvanceFunctionsButton().click();
-        } catch(org.openqa.selenium.NoSuchElementException e) {
-            buttonNavigationBar.move(865,2024,995,2100);
-        }
+
+        buttonNavigationBar.clickAdvanceFunctionsButtonInbuttonNavigationBar();
         advanceFunctionsPage.getAccountOrderButton().click();
         MobileElement addNewAccountButton = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/btn_create");
         addNewAccountButton.click();
@@ -58,7 +55,7 @@ public class AddNewAccountTest extends AbstractTest {
 
         MobileElement inputQuotaField = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/tv_current_amount");
         inputQuotaField.click();
-        for (char ch: amount.toCharArray()) {
+        for (char ch : amount.toCharArray()) {
             calculator.getButton(ch).click();
         }
         calculator.getOk().click();
@@ -73,10 +70,10 @@ public class AddNewAccountTest extends AbstractTest {
 
         boolean isCreateNewAccountSuccess = false;
         int accountListlength = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
-        for(int i = 1 ; i <= accountListlength; i++ ) {
+        for (int i = 1; i <= accountListlength; i++) {
             String xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/" +
-                    "android.view.ViewGroup["+ i + "]/android.widget.TextView";
-            if(driver.findElementByXPath(xpath).getText().equals(accountName)){
+                    "android.view.ViewGroup[" + i + "]/android.widget.TextView";
+            if (driver.findElementByXPath(xpath).getText().equals(accountName)) {
                 isCreateNewAccountSuccess = true;
                 break;
             }
@@ -92,11 +89,7 @@ public class AddNewAccountTest extends AbstractTest {
         String accountType = "一般";
         String amount = "12005";
         String comment = "會被取消";
-        try {
-            buttonNavigationBar.getAdvanceFunctionsButton().click();
-        } catch(org.openqa.selenium.NoSuchElementException e) {
-            buttonNavigationBar.move(865,2024,995,2100);
-        }
+        buttonNavigationBar.clickAdvanceFunctionsButtonInbuttonNavigationBar();
         advanceFunctionsPage.getAccountOrderButton().click();
         MobileElement addNewAccountButton = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/btn_create");
         addNewAccountButton.click();
@@ -111,7 +104,7 @@ public class AddNewAccountTest extends AbstractTest {
 
         MobileElement inputQuotaField = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/tv_current_amount");
         inputQuotaField.click();
-        for (char ch: amount.toCharArray()) {
+        for (char ch : amount.toCharArray()) {
             calculator.getButton(ch).click();
         }
         calculator.getOk().click();
@@ -125,10 +118,10 @@ public class AddNewAccountTest extends AbstractTest {
 
         boolean isCreateNewAccountCancel = true;
         int accountListlength = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
-        for(int i = 1 ; i <= accountListlength; i++ ) {
+        for (int i = 1; i <= accountListlength; i++) {
             String xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/" +
-                    "android.view.ViewGroup["+ i + "]/android.widget.TextView";
-            if(driver.findElementByXPath(xpath).getText().equals(accountName)){
+                    "android.view.ViewGroup[" + i + "]/android.widget.TextView";
+            if (driver.findElementByXPath(xpath).getText().equals(accountName)) {
                 isCreateNewAccountCancel = false;
             }
 
@@ -143,22 +136,16 @@ public class AddNewAccountTest extends AbstractTest {
         String accountType = "一般";
         String amount = "0";
         String comment = null;
-        try {
-            buttonNavigationBar.getAdvanceFunctionsButton().click();
-        } catch(org.openqa.selenium.NoSuchElementException e) {
-            buttonNavigationBar.move(865,2024,995,2100);
-        }
-
-
+        buttonNavigationBar.clickAdvanceFunctionsButtonInbuttonNavigationBar();
         advanceFunctionsPage.getAccountOrderButton().click();
         MobileElement addNewAccountButton = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/btn_create");
         addNewAccountButton.click();
 
         MobileElement inputAccountNameField = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/et_name");
         inputAccountNameField.click();
-        try{
+        try {
             inputAccountNameField.sendKeys(accountName);
-        }catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals(IllegalArgumentException.class, e.getClass());
         }
 
@@ -169,23 +156,23 @@ public class AddNewAccountTest extends AbstractTest {
 
         MobileElement inputQuotaField = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/tv_current_amount");
         inputQuotaField.click();
-        for (char ch: amount.toCharArray()) {
+        for (char ch : amount.toCharArray()) {
             calculator.getButton(ch).click();
         }
         calculator.getOk().click();
 
         MobileElement inputCommentField = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/et_note");
         inputCommentField.click();
-        try{
+        try {
             inputCommentField.sendKeys(comment);
-        }catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals(IllegalArgumentException.class, e.getClass());
         }
 
         MobileElement saveButton = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/btn_save");
         saveButton.click();
 
-        assertEquals("欄位還沒有填完喔！",driver.findElementByXPath("/hierarchy/android.widget.Toast").getText());
+        assertEquals("欄位還沒有填完喔！", driver.findElementByXPath("/hierarchy/android.widget.Toast").getText());
     }
 
     @Test
@@ -199,11 +186,7 @@ public class AddNewAccountTest extends AbstractTest {
         Boolean isNotifySet = true;
         String comment = " ";
 
-        try {
-            buttonNavigationBar.getAdvanceFunctionsButton().click();
-        } catch(org.openqa.selenium.NoSuchElementException e) {
-            buttonNavigationBar.move(865,2024,995,2100);
-        }
+        buttonNavigationBar.clickAdvanceFunctionsButtonInbuttonNavigationBar();
         advanceFunctionsPage.getAccountOrderButton().click();
         MobileElement addNewAccountButton = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/btn_create");
         addNewAccountButton.click();
@@ -218,7 +201,7 @@ public class AddNewAccountTest extends AbstractTest {
 
         MobileElement inputQuotaField = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/tv_current_amount");
         inputQuotaField.click();
-        for (char ch: amount.toCharArray()) {
+        for (char ch : amount.toCharArray()) {
             calculator.getButton(ch).click();
         }
         calculator.getOk().click();
@@ -232,7 +215,7 @@ public class AddNewAccountTest extends AbstractTest {
         paySettlementDateButton.clear();
         paySettlementDateButton.sendKeys(paySettlementDate);
 
-        if(isNotifySet) {
+        if (isNotifySet) {
             MobileElement setNotifyButton = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/cb_enable_notification");
             setNotifyButton.click();
         }
@@ -252,10 +235,10 @@ public class AddNewAccountTest extends AbstractTest {
 
         boolean isCreateNewAccountSuccess = false;
         int accountListlength = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
-        for(int i = 1 ; i <= accountListlength; i++ ) {
+        for (int i = 1; i <= accountListlength; i++) {
             String xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/" +
-                    "android.view.ViewGroup["+ i + "]/android.widget.TextView";
-            if(driver.findElementByXPath(xpath).getText().equals(accountName)){
+                    "android.view.ViewGroup[" + i + "]/android.widget.TextView";
+            if (driver.findElementByXPath(xpath).getText().equals(accountName)) {
                 isCreateNewAccountSuccess = true;
                 break;
             }
@@ -275,7 +258,7 @@ public class AddNewAccountTest extends AbstractTest {
         Boolean isNotifySet = false;
         String comment = " ";
 
-        buttonNavigationBar.getAdvanceFunctionsButton().click();
+        buttonNavigationBar.clickAdvanceFunctionsButtonInbuttonNavigationBar();
         advanceFunctionsPage.getAccountOrderButton().click();
         MobileElement addNewAccountButton = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/btn_create");
         addNewAccountButton.click();
@@ -290,7 +273,7 @@ public class AddNewAccountTest extends AbstractTest {
 
         MobileElement inputQuotaField = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/tv_current_amount");
         inputQuotaField.click();
-        for (char ch: amount.toCharArray()) {
+        for (char ch : amount.toCharArray()) {
             calculator.getButton(ch).click();
         }
         calculator.getOk().click();
@@ -303,7 +286,7 @@ public class AddNewAccountTest extends AbstractTest {
         paySettlementDateButton.clear();
         paySettlementDateButton.sendKeys(paySettlementDate);
 
-        if(isNotifySet) {
+        if (isNotifySet) {
             MobileElement setNotifyButton = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/cb_enable_notification");
             setNotifyButton.click();
         }
@@ -322,10 +305,10 @@ public class AddNewAccountTest extends AbstractTest {
 
         boolean isCreateNewAccountSuccess = false;
         int accountListlength = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
-        for(int i = 1 ; i <= accountListlength; i++ ) {
+        for (int i = 1; i <= accountListlength; i++) {
             String xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/" +
-                    "android.view.ViewGroup["+ i + "]/android.widget.TextView";
-            if(driver.findElementByXPath(xpath).getText().equals(accountName)){
+                    "android.view.ViewGroup[" + i + "]/android.widget.TextView";
+            if (driver.findElementByXPath(xpath).getText().equals(accountName)) {
                 isCreateNewAccountSuccess = true;
                 break;
             }
@@ -343,11 +326,7 @@ public class AddNewAccountTest extends AbstractTest {
         String dueDate = "01 June 2021";
         Boolean isNotifySet = true;
         String comment = "希望這次投資會中!!";
-        try {
-            buttonNavigationBar.getAdvanceFunctionsButton().click();
-        } catch(org.openqa.selenium.NoSuchElementException e) {
-            buttonNavigationBar.move(865,2024,995,2100);
-        }
+        buttonNavigationBar.clickAdvanceFunctionsButtonInbuttonNavigationBar();
         advanceFunctionsPage.getAccountOrderButton().click();
         MobileElement addNewAccountButton = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/btn_create");
         addNewAccountButton.click();
@@ -362,7 +341,7 @@ public class AddNewAccountTest extends AbstractTest {
 
         MobileElement inputQuotaField = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/tv_current_amount");
         inputQuotaField.click();
-        for (char ch: amount.toCharArray()) {
+        for (char ch : amount.toCharArray()) {
             calculator.getButton(ch).click();
         }
         calculator.getOk().click();
@@ -371,7 +350,7 @@ public class AddNewAccountTest extends AbstractTest {
         dueDateButton.click();
         dueDateButton.sendKeys(dueDate);
 
-        if(isNotifySet) {
+        if (isNotifySet) {
             MobileElement setNotifyButton = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/cb_enable_notification");
             setNotifyButton.click();
         }
@@ -389,10 +368,10 @@ public class AddNewAccountTest extends AbstractTest {
 
         boolean isCreateNewAccountSuccess = false;
         int accountListlength = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
-        for(int i = 1 ; i <= accountListlength; i++ ) {
+        for (int i = 1; i <= accountListlength; i++) {
             String xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/" +
-                    "android.view.ViewGroup["+ i + "]/android.widget.TextView";
-            if(driver.findElementByXPath(xpath).getText().equals(accountName)){
+                    "android.view.ViewGroup[" + i + "]/android.widget.TextView";
+            if (driver.findElementByXPath(xpath).getText().equals(accountName)) {
                 isCreateNewAccountSuccess = true;
                 break;
             }
@@ -411,7 +390,7 @@ public class AddNewAccountTest extends AbstractTest {
         Boolean isNotifySet = false;
         String comment = "希望這次投資會中!!希望這次投資會中!!希望這次投資會中!!希望這次投資會中!!希望這次投資會中!!希望這次投資會中!!";
 
-        buttonNavigationBar.getAdvanceFunctionsButton().click();
+        buttonNavigationBar.clickAdvanceFunctionsButtonInbuttonNavigationBar();
         advanceFunctionsPage.getAccountOrderButton().click();
         MobileElement addNewAccountButton = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/btn_create");
         addNewAccountButton.click();
@@ -426,7 +405,7 @@ public class AddNewAccountTest extends AbstractTest {
 
         MobileElement inputQuotaField = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/tv_current_amount");
         inputQuotaField.click();
-        for (char ch: amount.toCharArray()) {
+        for (char ch : amount.toCharArray()) {
             calculator.getButton(ch).click();
         }
         calculator.getOk().click();
@@ -435,7 +414,7 @@ public class AddNewAccountTest extends AbstractTest {
         dueDateButton.click();
         dueDateButton.sendKeys(dueDate);
 
-        if(isNotifySet) {
+        if (isNotifySet) {
             MobileElement setNotifyButton = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/cb_enable_notification");
             setNotifyButton.click();
         }
@@ -453,10 +432,10 @@ public class AddNewAccountTest extends AbstractTest {
 
         boolean isCreateNewAccountSuccess = false;
         int accountListlength = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
-        for(int i = 1 ; i <= accountListlength; i++ ) {
+        for (int i = 1; i <= accountListlength; i++) {
             String xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/" +
-                    "android.view.ViewGroup["+ i + "]/android.widget.TextView";
-            if(driver.findElementByXPath(xpath).getText().equals(accountName)){
+                    "android.view.ViewGroup[" + i + "]/android.widget.TextView";
+            if (driver.findElementByXPath(xpath).getText().equals(accountName)) {
                 isCreateNewAccountSuccess = true;
                 break;
             }
@@ -475,7 +454,7 @@ public class AddNewAccountTest extends AbstractTest {
         Boolean isNotifySet = false;
         String comment = "可以的吧~希望這次投資會中!!希望這次投資會中!!";
 
-        buttonNavigationBar.getAdvanceFunctionsButton().click();
+        buttonNavigationBar.clickAdvanceFunctionsButtonInbuttonNavigationBar();
         advanceFunctionsPage.getAccountOrderButton().click();
         MobileElement addNewAccountButton = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/btn_create");
         addNewAccountButton.click();
@@ -490,7 +469,7 @@ public class AddNewAccountTest extends AbstractTest {
 
         MobileElement inputQuotaField = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/tv_current_amount");
         inputQuotaField.click();
-        for (char ch: amount.toCharArray()) {
+        for (char ch : amount.toCharArray()) {
             calculator.getButton(ch).click();
         }
         calculator.getOk().click();
@@ -499,7 +478,7 @@ public class AddNewAccountTest extends AbstractTest {
         dueDateButton.click();
         dueDateButton.sendKeys(dueDate);
 
-        if(isNotifySet) {
+        if (isNotifySet) {
             MobileElement setNotifyButton = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/cb_enable_notification");
             setNotifyButton.click();
         }
@@ -517,10 +496,10 @@ public class AddNewAccountTest extends AbstractTest {
 
         boolean isCreateNewAccountSuccess = false;
         int accountListlength = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
-        for(int i = 1 ; i <= accountListlength; i++ ) {
+        for (int i = 1; i <= accountListlength; i++) {
             String xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/" +
-                    "android.view.ViewGroup["+ i + "]/android.widget.TextView";
-            if(driver.findElementByXPath(xpath).getText().equals(accountName)){
+                    "android.view.ViewGroup[" + i + "]/android.widget.TextView";
+            if (driver.findElementByXPath(xpath).getText().equals(accountName)) {
                 isCreateNewAccountSuccess = true;
                 break;
             }
@@ -529,13 +508,13 @@ public class AddNewAccountTest extends AbstractTest {
         this.delete_the_account(accountName);
     }
 
-    private void  delete_the_account(String deletedAccountName) {
-        MobileElement preCreatedAccount = null ;
+    private void delete_the_account(String deletedAccountName) {
+        MobileElement preCreatedAccount = null;
         int accountListlength = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
-        for(int i = 1 ; i <= accountListlength; i++ ) {
+        for (int i = 1; i <= accountListlength; i++) {
             String xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/" +
-                    "android.view.ViewGroup["+ i + "]/android.widget.TextView";
-            if(driver.findElementByXPath(xpath).getText().equals(deletedAccountName)){
+                    "android.view.ViewGroup[" + i + "]/android.widget.TextView";
+            if (driver.findElementByXPath(xpath).getText().equals(deletedAccountName)) {
                 preCreatedAccount = driver.findElementByXPath(xpath);
                 break;
             }
@@ -543,24 +522,24 @@ public class AddNewAccountTest extends AbstractTest {
 
         preCreatedAccount.click();
 
-        MobileElement deleteAccountButton =(MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/menu_delete");
+        MobileElement deleteAccountButton = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/menu_delete");
         deleteAccountButton.click();
 
         MobileElement deleteConfirmButton = null;
-        try{
+        try {
             deleteConfirmButton = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/btn_confirm");
-        }catch (Exception e ){
-            deleteConfirmButton = (MobileElement)driver.findElementByAndroidUIAutomator("new UiSelector().text(\"確定\")");
+        } catch (Exception e) {
+            deleteConfirmButton = (MobileElement) driver.findElementByAndroidUIAutomator("new UiSelector().text(\"確定\")");
         }
         deleteConfirmButton.click();
 
         boolean isDeleteAccountSuccess = false;
         int afterDeleteAccountListLength = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
 
-        for(int i = 1 ; i <= afterDeleteAccountListLength; i++ ) {
+        for (int i = 1; i <= afterDeleteAccountListLength; i++) {
             String xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/" +
-                    "android.view.ViewGroup["+ i + "]/android.widget.TextView";
-            if(driver.findElementByXPath(xpath).getText().equals(deletedAccountName)){
+                    "android.view.ViewGroup[" + i + "]/android.widget.TextView";
+            if (driver.findElementByXPath(xpath).getText().equals(deletedAccountName)) {
                 isDeleteAccountSuccess = true;
                 break;
             }

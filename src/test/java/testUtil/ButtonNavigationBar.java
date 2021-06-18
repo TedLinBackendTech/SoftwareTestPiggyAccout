@@ -5,6 +5,8 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.touch.offset.PointOption;
 
+import java.util.concurrent.TimeUnit;
+
 public class ButtonNavigationBar {
     private AndroidDriver driver;
 
@@ -15,6 +17,15 @@ public class ButtonNavigationBar {
     MobileElement advanceFunctionsButton;
     public ButtonNavigationBar(AndroidDriver driver) {
         this.driver = driver;
+    }
+
+    public void clickAdvanceFunctionsButtonInbuttonNavigationBar() {
+        try {
+            this.getAdvanceFunctionsButton().click();
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+            this.move(865, 2024, 995, 2100);
+        }
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
     }
 
     public MobileElement getRecordListButton() {

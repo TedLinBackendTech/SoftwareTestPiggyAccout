@@ -399,9 +399,7 @@ public class DeleteCategoryTest extends AbstractTest {
     }
 
     private void create_new_normal_expense_category(String categoryName){
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        buttonNavigationBar.getAdvanceFunctionsButton().click();
-        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        buttonNavigationBar.clickAdvanceFunctionsButtonInbuttonNavigationBar();
         advanceFunctionsPage.getExpenseCategoryButton().click();
         driver.findElementById("com.coceany.piggyaccounting:id/btn_create").click();
         MobileElement el = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/et_name");
@@ -414,9 +412,7 @@ public class DeleteCategoryTest extends AbstractTest {
     }
 
     private void create_new_normal_income_category(String categoryName){
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        buttonNavigationBar.getAdvanceFunctionsButton().click();
-        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        buttonNavigationBar.clickAdvanceFunctionsButtonInbuttonNavigationBar();
         advanceFunctionsPage.getIncomeCategoryButton().click();
         driver.findElementById("com.coceany.piggyaccounting:id/btn_create").click();
         MobileElement el = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/et_name");
