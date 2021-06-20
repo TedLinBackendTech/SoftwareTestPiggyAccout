@@ -146,13 +146,19 @@ public class EditExpenseTest extends AbstractTest {
     }
 
     private void delete_temp_data(){
-        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-        MobileElement el10 = (MobileElement) driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[2]");
-        el10.click();
-        MobileElement el2 = (MobileElement) driver.findElementByAccessibilityId("刪除");
-        el2.click();
-        MobileElement el3 = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/btn_confirm");
-        el3.click();
+        int expenseListlength = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
+
+        for(int i = 1 ; i <= expenseListlength; i++ ) {
+            try{
+                MobileElement el19 = (MobileElement) driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup["+i+"]");
+                el19.click();
+                driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+                MobileElement el2 = (MobileElement) driver.findElementByAccessibilityId("刪除");
+                el2.click();
+                MobileElement el3 = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/btn_confirm");
+                el3.click();
+            }catch (Exception e){}
+        }
     }
 
     @Test
@@ -349,11 +355,12 @@ public class EditExpenseTest extends AbstractTest {
         String amountField = driver.findElementById("com.coceany.piggyaccounting:id/tv_amount").getText();
         assertTrue(!amountField.contains("-"));
         saveButton.click();
+        this.delete_temp_data();
     }
 
     @Test
     public void Test_edit_expense_tc4(){
-        String date="02 June 2021";
+        String date="12 June 2021";
         String money="1000";
         String category="晚餐";
         String accountName="其他";
