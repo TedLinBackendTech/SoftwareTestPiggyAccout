@@ -193,13 +193,19 @@ public class AddExpenseTest extends AbstractTest {
     }
 
     private void delete_temp_data(){
-        MobileElement el19 = (MobileElement) driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[2]");
-        el19.click();
-        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-        MobileElement el2 = (MobileElement) driver.findElementByAccessibilityId("刪除");
-        el2.click();
-        MobileElement el3 = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/btn_confirm");
-        el3.click();
+        int expenseListlength = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
+
+        for(int i = 1 ; i <= expenseListlength; i++ ) {
+            try{
+                MobileElement el19 = (MobileElement) driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup["+i+"]");
+                el19.click();
+                driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+                MobileElement el2 = (MobileElement) driver.findElementByAccessibilityId("刪除");
+                el2.click();
+                MobileElement el3 = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/btn_confirm");
+                el3.click();
+            }catch (Exception e){}
+        }
     }
 
     @Test
