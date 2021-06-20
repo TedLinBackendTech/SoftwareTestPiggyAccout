@@ -73,19 +73,22 @@ public class DeleteExpenseTest extends AbstractTest {
 
         boolean isDeleteExpensetSuccess = true;
         int expenseListlength = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
-
-        for(int i = 1 ; i <= expenseListlength; i++ ) {
-            String xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup";
-            String EIxpath_account = xpath + "[" + i + "]/android.widget.TextView[1]";
-            String EIxpath_category = xpath + "[" + i + "]/android.widget.TextView[2]";
-            String EIxpath_amount = xpath + "[" + i + "]/android.widget.TextView[3]";
-            if(driver.findElementByXPath(EIxpath_account).getText().equals("現金") &&
-                    driver.findElementByXPath(EIxpath_category).getText().equals("早餐") &&
-                    driver.findElementByXPath(EIxpath_amount).getText().equals("$1,000")){
-                isDeleteExpensetSuccess = false;
-                break;
+        try{
+            for(int i = 1 ; i <= expenseListlength; i++ ) {
+                String xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup";
+                String EIxpath_account = xpath + "[" + i + "]/android.widget.TextView[1]";
+                String EIxpath_category = xpath + "[" + i + "]/android.widget.TextView[2]";
+                String EIxpath_amount = xpath + "[" + i + "]/android.widget.TextView[3]";
+                if(driver.findElementByXPath(EIxpath_account).getText().equals("現金") &&
+                        driver.findElementByXPath(EIxpath_category).getText().equals("早餐") &&
+                        driver.findElementByXPath(EIxpath_amount).getText().equals("$1,000")){
+                    isDeleteExpensetSuccess = false;
+                    break;
+                }
             }
+        }catch (Exception e){
         }
+
         assertTrue(isDeleteExpensetSuccess);
     }
 
@@ -98,6 +101,7 @@ public class DeleteExpenseTest extends AbstractTest {
         el1.click();
         MobileElement el2 = (MobileElement) driver.findElementById("com.coceany.piggyaccounting:id/btn_cancel");
         el2.click();
+        driver.navigate().back();
         driver.navigate().back();
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         int expenseListlength = driver.findElementsByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup").size();
